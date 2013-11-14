@@ -1,0 +1,7 @@
+<snippet>
+    <content><![CDATA[/* jshint ${1} */
+]]></content>
+    <tabTrigger>jsh</tabTrigger>
+    <scope>source.js</scope>
+    <description>jshint header</description>
+</snippet>

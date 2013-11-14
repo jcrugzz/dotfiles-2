@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[
+var ${1:name} = exports.${2:name} = function(${3}){
+  ${0}
+};
+]]></content>
+  <tabTrigger>exp</tabTrigger>
+  <scope>source.js</scope>
+</snippet>

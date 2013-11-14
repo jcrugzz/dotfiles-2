@@ -1,0 +1,214 @@
+PATH=/usr/local/share/npm/bin:~/bin:/usr/local/bin:$PATH
+JAVA_HOME=/Library/Java/Home
+BLUE="\033[34m"
+LIGHT_GRAY="\033[0;37m"
+CYAN="\033[0;36m"
+GREEN="\033[0;32m"
+MAGENTA="\033[0;35m"
+YELLOW="\033[0;33m"
+CYAN="\033[0;36m"
+OFF="\033[0m"
+VIRTUAL_ENV_DISABLE_PROMPT=true
+PROMPT_COMMAND=prompt
+PS1="↳ "
+EDITOR=vim
+
+source ~/Dropbox/SystemSync/git_complete.sh
+
+# source appropriate environment info
+if [ -d ~/.python ]; then
+    source ~/.python/bin/activate
+fi
+
+if [ -f ~/.tokens ]; then
+    source ~/.tokens
+fi
+
+if [ -n "$(which brew)" ]; then
+    [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+fi
+
+# do we have hub available?
+if [ -n "$(which hub)" ]; then
+    alias git="/usr/local/bin/hub"
+fi
+
+#aliases
+alias dev="git checkout development && git pull"
+alias master="git checkout master && git pull"
+alias gs="git status"
+alias gd="git diff"
+alias gc="git checkout"
+alias gl="git lg"
+alias ga="git add"
+alias yay!='git push origin master && git push --tags && npm publish'
+alias cyay!='git push origin master && git push --tags && cnpm publish'
+alias td="tree -d -I node_modules"
+alias cnpm="npm --reg https://condenast.npmjitsu.co"
+
+# install nice gitlog if it's not there...
+if [ -z "$(git config --global alias.lg)" ]; then
+    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+fi
+
+# Linux and BSD have some differences in ls
+MACH_TYPE=$(uname)
+if [ "$MACH_TYPE" == "Linux" ]; then
+    alias dir="ls -ltF --color=auto"
+elif [ "$MACH_TYPE" == "Darwin" ]; then
+    alias preview="open -F -a /Applications/Preview.app"
+    alias chrome="open -a /Applications/Google\ Chrome.app"
+    alias excel="open -a /Applications/Microsoft\ Office\ 2011/Microsoft\ Excel.app"
+    alias dir="ls -lthFG"
+fi
+
+# do we have a keychain manager?
+if [ -n "$(which keychain)" ]
+then
+    keychain id_rsa
+    . ~/.keychain/`uname -n`-sh
+fi
+
+function prompt (){
+    GIT_INFO=$(git_prompt)
+    PATH_INFO=$(path_info)
+    USER_INFO=$(whoami)
+    HOST_INFO=$(hostname)
+    TIME_INFO=$(date +%H:%M:%S)
+    SERV_INFO=""
+    WORKSPACE_INFO=""
+
+    if [[ `type -t cnscm_get_workspace_name` == 'function' ]]
+        then WORKSPACE_INFO="Workspace: $GREEN$(cnscm_get_workspace_name)$OFF\n"
+    fi
+
+
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
+        then SERV_INFO="$USER_INFO@$HOST_INFO "
+    fi
+
+    echo -ne "$SERV_INFO$CYAN$TIME_INFO$OFF $YELLOW$PATH_INFO$OFF$GIT_INFO\n$WORKSPACE_INFO"
+}
+
+function gp (){
+    BRANCH=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+    git push -u origin $BRANCH
+}
+
+function git_prompt (){
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        return 0
+    fi
+
+    UNCOMMITTED=$(git status --porcelain --untracked-files=no)
+    UNADDED=$(git ls-files --other --exclude-standard --directory)
+    BRANCH=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+    UNPUSHED=$(git diff origin/$BRANCH 2>/dev/null)
+    GIT_PROMPT=$BRANCH
+    PROMPT_COLOR=$GREEN
+
+    if [ -n "$UNCOMMITTED" ]
+    then
+        GIT_PROMPT="$GIT_PROMPT \xe2\x98\xb9"
+        PROMPT_COLOR=$CYAN
+    fi
+
+    if [ -n "$UNADDED" ]
+    then
+        GIT_PROMPT="$GIT_PROMPT \xe2\x98\xa3"
+        PROMPT_COLOR=$MAGENTA
+    fi
+
+    if [ -z "$UNCOMMITTED" ] && [ -z "$UNADDED" ]
+    then
+        GIT_PROMPT="$GIT_PROMPT \xe2\x9c\x94"
+    fi
+
+    echo -e ":$PROMPT_COLOR$GIT_PROMPT$OFF"
+}
+
+function path_info (){
+    pwd_length=10
+    pwd_symbol="..."
+    newPWD="${PWD/#$HOME/~}"
+    if [ $(echo -n $newPWD | wc -c | tr -d " ") -gt $pwd_length ]
+    then
+        newPWD=$(echo -n $newPWD | awk -F '/' '{print $1 "/" $2 "/.../" $(NF-1) "/" $(NF)}')
+    fi
+
+    echo -e $newPWD
+}
+
+function vm-up () {
+	prlctl start development
+}
+
+function vm-down () {
+    prlctl suspend development
+}
+
+function vm-kill () {
+    prlctl stop development
+}
+
+function dev (){
+    git checkout development && git pull
+}
+
+function branch (){
+    args=("$@")
+
+    if [ -n "${args[1]}" ]
+    then
+        git stash
+    fi
+
+    git checkout development && git pull && git checkout -b ${args[0]}
+
+    if [ -n "${args[1]}" ]
+    then
+        git stash pop
+    fi
+}
+
+function pr (){
+    ARGS=("$@")
+
+    # do we need help?
+    if [ "${ARGS[0]}" == "-h" ]
+    then
+        echo "pr MESSAGE PIVOTAL_TICKET_ID"
+        return 0
+    fi
+
+    # are we in a git repo?
+    GIT_BRANCH=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        echo "You're not in a git repo..."
+        return 0
+    fi
+
+    GIT_REPO_NAME=$(basename `git rev-parse --show-toplevel`)
+
+    # make the pull request and get the ID
+    PULL_URL=$(git pull-request "${ARGS[0]}" -b CondeNast:development -h CondeNast:$GIT_BRANCH)
+    echo "Pull request made: $PULL_URL"
+    PULL_ID=$(echo $PULL_URL | cut -d/ -f 7)
+
+    # do we have a pivotal ticket o deal with?
+    if [ -n ${ARGS[1]} ]
+    then
+        echo "Updating Pivotal..."
+        # UPDATE PIVOTAL...
+        PIVOTAL_RESPONSE=$(curl -s -H "X-TrackerToken: $PIVOTAL_ACCESS" -X POST -H "Content-type: application/xml" -d "<note><text>$PULL_URL</text></note>" https://www.pivotaltracker.com/services/v3/projects/$PIVOTAL_PROJECT_ID/stories/${ARGS[1]}/notes)
+
+        echo "Updating Github..."
+        # UPDATE GITHUB...
+        PAYLOAD="{\"body\": \"https://www.pivotaltracker.com/story/show/${ARGS[1]}\"}"
+        GIT_URL="https://api.github.com/repos/condenast/$GIT_REPO_NAME/pulls/$PULL_ID"
+        GIT_RESPONSE=$(curl -s -X PATCH -H "Content-type: application/json" -H "Authorization: token $GITHUB_ACCESS" -d "$PAYLOAD" $GIT_URL)
+    fi
+    echo "Done"
+}
+
+export PATH PS1 JAVA_HOME EDITOR

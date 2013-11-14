@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BatteryTimeFontSize</key>
+	<integer>14</integer>
+	<key>CPUMultiple</key>
+	<integer>1</integer>
+	<key>ClockDisplayMode</key>
+	<array>
+		<string>EE</string>
+		<string>' '</string>
+		<string>MMM</string>
+		<string>' '</string>
+		<string>d</string>
+		<string>', '</string>
+		<string>yyyy</string>
+		<string>' '</string>
+		<string>HH</string>
+		<string>':'</string>
+		<string>mm</string>
+	</array>
+	<key>ClockFontSize</key>
+	<integer>14</integer>
+	<key>DisksMenubar</key>
+	<array>
+		<string>9B408A69-9373-334E-953E-D7448F73D11E</string>
+	</array>
+	<key>FanSpeedSets</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Medium</string>
+			<key>speeds</key>
+			<array>
+				<dict>
+					<key>fan</key>
+					<string>F0Ac</string>
+					<key>speed</key>
+					<integer>4050</integer>
+				</dict>
+				<dict>
+					<key>fan</key>
+					<string>F1Ac</string>
+					<key>speed</key>
+					<integer>3749</integer>
+				</dict>
+			</array>
+			<key>uuid</key>
+			<string>EE1CF9C7-1FF2-4B96-A1B6-807295009ABA</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>High</string>
+			<key>speeds</key>
+			<array>
+				<dict>
+					<key>fan</key>
+					<string>F0Ac</string>
+					<key>speed</key>
+					<integer>5940</integer>
+				</dict>
+				<dict>
+					<key>fan</key>
+					<string>F1Ac</string>
+					<key>speed</key>
+					<integer>5499</integer>
+				</dict>
+			</array>
+			<key>uuid</key>
+			<string>0176807F-67EE-43C1-87A4-801C50E9B477</string>
+		</dict>
+	</array>
+	<key>MemoryDisplayMode</key>
+	<string>100,3</string>
+	<key>SensorsMenubar</key>
+	<array>
+		<string>TCXC</string>
+	</array>
+	<key>ShowLauncher</key>
+	<integer>1</integer>
+	<key>SkinType</key>
+	<integer>1</integer>
+	<key>_mac_id</key>
+	<string>62ba15e15f0bf982d1079a0867befc0b</string>
+	<key>migratedExtras4.0</key>
+	<true/>
+	<key>sendDiagnostics</key>
+	<false/>
+	<key>skinColor</key>
+	<integer>1</integer>
+	<key>updateCheckerEnabled</key>
+	<true/>
+</dict>
+</plist>
