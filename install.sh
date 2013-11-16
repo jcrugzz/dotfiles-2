@@ -6,16 +6,16 @@ CURR_DIR=$(pwd)
 if [[ -d  "$SUBLIME_USER_DIR" ]]; then
   for SUBLIME_FILE in sublime/*; do
     SUB_FILE=$(echo $SUBLIME_FILE | cut -d '/' -f2)
-    if [[ ! -e "$SUBLIME_USER_DIR$SUB_FILE" ]]; then
+    if [[ -e "$SUBLIME_USER_DIR$SUB_FILE" ]]; then
       rm "$SUBLIME_USER_DIR$SUB_FILE"
     fi
     ln -s "$CURR_DIR/$SUBLIME_FILE" "$SUBLIME_USER_DIR$SUB_FILE"
   done
 fi
 
-for DOTFILE in bash/*; do
+for DOTFILE in homedir/*; do
   DOT=$(echo $DOTFILE | cut -d '/' -f2)
-  if [[ ! -e $HOME/.$DOT ]]; then
+  if [[ -e $HOME/.$DOT ]]; then
     rm $HOME/.$DOT
   fi
   ln -s $CURR_DIR/$DOTFILE $HOME/.$DOT
@@ -23,7 +23,7 @@ done
 
 for PREF in preferences/*; do
   PREFFILE=$(echo $PREF | cut -d '/' -f2)
-  if [[ ! -e "$PREF_PATH$PREFFILE" ]]; then
+  if [[ -e "$PREF_PATH$PREFFILE" ]]; then
     rm "$PREF_PATH$PREFFILE"
   fi
   ln -s $CURR_DIR/$PREF "$PREF_PATH$PREFFILE"
