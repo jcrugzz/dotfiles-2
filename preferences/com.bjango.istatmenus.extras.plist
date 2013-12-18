@@ -4,6 +4,10 @@
 <dict>
 	<key>BatteryTimeFontSize</key>
 	<integer>14</integer>
+	<key>CPUDisplayMode</key>
+	<string>0</string>
+	<key>CPUGroupItems</key>
+	<integer>0</integer>
 	<key>CPUMultiple</key>
 	<integer>1</integer>
 	<key>ClockDisplayMode</key>
@@ -22,9 +26,19 @@
 	</array>
 	<key>ClockFontSize</key>
 	<integer>14</integer>
+	<key>DiskActivityDisplayMode</key>
+	<string>100,1</string>
+	<key>DiskDisplayMode</key>
+	<string>100,2</string>
+	<key>DiskGroupItems</key>
+	<integer>0</integer>
+	<key>DiskShowUFLabel</key>
+	<integer>1</integer>
+	<key>DisksBase10</key>
+	<integer>0</integer>
 	<key>DisksMenubar</key>
 	<array>
-		<string>9B408A69-9373-334E-953E-D7448F73D11E</string>
+		<string>BC4D43F0-0E76-3107-8EC6-1851F8D97867</string>
 	</array>
 	<key>FanSpeedSets</key>
 	<array>
@@ -37,52 +51,45 @@
 					<key>fan</key>
 					<string>F0Ac</string>
 					<key>speed</key>
-					<integer>4050</integer>
-				</dict>
-				<dict>
-					<key>fan</key>
-					<string>F1Ac</string>
-					<key>speed</key>
-					<integer>3749</integer>
+					<real>3750</real>
 				</dict>
 			</array>
 			<key>uuid</key>
-			<string>EE1CF9C7-1FF2-4B96-A1B6-807295009ABA</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>High</string>
-			<key>speeds</key>
-			<array>
-				<dict>
-					<key>fan</key>
-					<string>F0Ac</string>
-					<key>speed</key>
-					<integer>5940</integer>
-				</dict>
-				<dict>
-					<key>fan</key>
-					<string>F1Ac</string>
-					<key>speed</key>
-					<integer>5499</integer>
-				</dict>
-			</array>
-			<key>uuid</key>
-			<string>0176807F-67EE-43C1-87A4-801C50E9B477</string>
+			<string>98BC6265-2309-47B8-A281-17C3A7A74D33</string>
 		</dict>
 	</array>
 	<key>MemoryDisplayMode</key>
-	<string>100,3</string>
+	<string>3</string>
+	<key>NetworkDisplayMode</key>
+	<string>100,0,1</string>
+	<key>NetworkGraphMode</key>
+	<integer>0</integer>
+	<key>NetworkGraphScale</key>
+	<real>0.63698744773864746</real>
+	<key>NetworkScaleTo</key>
+	<integer>0</integer>
+	<key>SensorsHideRPMSuffix</key>
+	<integer>0</integer>
 	<key>SensorsMenubar</key>
 	<array>
-		<string>TCXC</string>
+		<string>TC0D</string>
 	</array>
 	<key>ShowLauncher</key>
 	<integer>1</integer>
 	<key>SkinType</key>
 	<integer>1</integer>
+	<key>TempType</key>
+	<integer>0</integer>
+	<key>UseMono</key>
+	<integer>0</integer>
 	<key>_mac_id</key>
-	<string>62ba15e15f0bf982d1079a0867befc0b</string>
+	<string>c787b487f49f0db0670032a32f08defa</string>
+	<key>cities</key>
+	<array>
+		<integer>1221</integer>
+	</array>
+	<key>migrated4.0</key>
+	<true/>
 	<key>migratedExtras4.0</key>
 	<true/>
 	<key>sendDiagnostics</key>
@@ -91,5 +98,7 @@
 	<integer>1</integer>
 	<key>updateCheckerEnabled</key>
 	<true/>
+	<key>update_checker_skip</key>
+	<real>4.0199999809265137</real>
 </dict>
 </plist>

@@ -1,6 +1,7 @@
 {
 	"installed_packages":
 	[
+		"BracketHighlighter",
 		"DocBlockr",
 		"Git",
 		"JsFormat",
