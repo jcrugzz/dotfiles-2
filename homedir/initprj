@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# fail on errors
+set -e
+
+PROJECTNAME=$1
+mkdir $PROJECTNAME
+cd $PROJECTNAME
+
+git init .
+git remote add origin git@github.com:toddself/$PROJECTNAME
+git create
+pkginit
+
+cp $HOME/src/dotfiles/src/pre-commit.sh pre-commit.sh
+cp $HOME/src/dotfiles/src/.gitignore .gitignore
+cp $HOME/src/dotfiles/src/.jshintrc .jshintrc
+
+npm install

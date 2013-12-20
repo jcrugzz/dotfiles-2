@@ -7,14 +7,15 @@
   },
   "main": prompt('entry point', 'index.js'),
   "scripts": {
-    "postinstall": "if [[ -d .git ]]; then cp $HOME/.pre-commit.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
+    "postinstall": "if [[ -d .git ]]; then cp pre-commit.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
     "pre-commit": "npm run lint && npm test",
     "lint": "jshint",
     "test": "if [[ -d test ]]; then tap test/*js; else tap *test.js; fi"
   },
   "dependencies": {},
   "devDependencies": {
-    "tap": "~0.4.4"
+    "tap": "~0.4.4",
+    "jshint": "~2.3.0"
   },
   "author": {
     "name": "Todd Kennedy",
