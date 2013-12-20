@@ -29,9 +29,9 @@ for PREF in preferences/*; do
   ln -s $CURR_DIR/$PREF "$PREF_PATH$PREFFILE"
 done
 
-if [[! -d $HOME/bin ]]; then
+if [[ ! -d $HOME/bin ]]; then
   mkdir $HOME/bin
 fi
 
-ln -s $HOME/.initprj $HOME/bin/initprj
+ln -s $HOME/.initprj $HOME/bin/initprj && chmod +x $HOME/bin/initprj
 export PATH=$PATH:$HOME/bin

@@ -10,12 +10,14 @@
     "postinstall": "if [[ -d .git ]]; then cp pre-commit.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
     "pre-commit": "npm run lint && npm test",
     "lint": "jshint",
-    "test": "if [[ -d test ]]; then tap test/*js; else tap *test.js; fi"
+    "test": "if [[ -d test ]]; then tap test/*js; else tap *test.js; fi",
+    "prepublish": "docme README.md -- --configure .jsdocrc.json"
   },
   "dependencies": {},
   "devDependencies": {
     "tap": "~0.4.4",
-    "jshint": "~2.3.0"
+    "jshint": "~2.3.0",
+    "docme": "~0.1.5"
   },
   "author": {
     "name": "Todd Kennedy",
