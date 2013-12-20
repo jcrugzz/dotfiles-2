@@ -3,13 +3,20 @@
 # fail on errors
 set -e
 
+HUB=$(which hub)
 PROJECTNAME=$1
 mkdir $PROJECTNAME
 cd $PROJECTNAME
 
 git init .
 git remote add origin git@github.com:toddself/$PROJECTNAME
-git create
+
+if [[ -n $HUB ]]; then
+  $HUB create
+else
+  echo 'hub not installed, please create $PROJECTNAME on github'
+fi
+
 pkginit
 
 cp $HOME/src/dotfiles/src/pre-commit.sh pre-commit.sh
