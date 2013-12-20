@@ -96,14 +96,15 @@ function gp (){
 }
 
 function git_prompt (){
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    GIT=$(which git)
+    if ! $GIT rev-parse --git-dir > /dev/null 2>&1; then
         return 0
     fi
 
-    UNCOMMITTED=$(git status --porcelain --untracked-files=no)
-    UNADDED=$(git ls-files --other --exclude-standard --directory)
-    BRANCH=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-    UNPUSHED=$(git diff origin/$BRANCH 2>/dev/null)
+    UNCOMMITTED=$($GIT status --porcelain --untracked-files=no)
+    UNADDED=$($GIT ls-files --other --exclude-standard --directory)
+    BRANCH=$($GIT branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+    UNPUSHED=$($GIT diff origin/$BRANCH 2>/dev/null)
     GIT_PROMPT=$BRANCH
     PROMPT_COLOR=$GREEN
 

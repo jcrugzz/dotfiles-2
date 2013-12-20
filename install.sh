@@ -33,5 +33,6 @@ if [[ ! -d $HOME/bin ]]; then
   mkdir $HOME/bin
 fi
 
-ln -s $HOME/.initprj $HOME/bin/initprj && chmod +x $HOME/bin/initprj
-export PATH=$PATH:$HOME/bin
+if [[ ! -f $HOME/bin/initprj ]]; then
+  ln -s $HOME/.initprj $HOME/bin/initprj && chmod +x $HOME/bin/initprj
+fi
