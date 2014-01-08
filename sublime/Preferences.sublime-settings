@@ -20,8 +20,9 @@
 		".git",
 		"components",
 		".build",
-		".hg",
-		"node_modules"
+		".hg"
+		// ,
+		// "node_modules"
 	],
 	"font_face": "Menlo",
 	"font_size": 12,

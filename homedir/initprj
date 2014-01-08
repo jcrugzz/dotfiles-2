@@ -23,6 +23,7 @@ cp $HOME/src/dotfiles/src/pre-commit.sh pre-commit.sh
 cp $HOME/src/dotfiles/src/gitignore .gitignore
 cp $HOME/src/dotfiles/src/jshintrc .jshintrc
 cp $HOME/src/dotfiles/src/jsdocrc.json .jsdocrc.json
+cp $HOME/src/dotfiles/src/post-install.js post-install.js
 touch README.md
 
 npm install
