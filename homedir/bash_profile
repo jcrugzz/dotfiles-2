@@ -44,7 +44,7 @@ alias ga="git add"
 alias yay!='git push origin master && git push --tags && npm publish'
 alias cyay!='git push origin master && git push --tags && cnpm publish'
 alias td="tree -d -I node_modules"
-alias cnpm="npm --reg https://condenast.npmjitsu.co"
+alias cnpm="npm --reg http://registry.conde.io"
 
 # install nice gitlog if it's not there...
 if [ -z "$(git config --global alias.lg)" ]; then
