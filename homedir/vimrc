@@ -1,0 +1,69 @@
+let isGui = has("gui_running")
+let isUnix = has("unix")
+let isMac = has("mac")
+
+filetype off
+filetype plugin on
+call pathogen#infect()
+call pathogen#helptags()
+
+set shell=/bin/bash
+
+set nocompatible
+set virtualedit=
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+set autoindent
+set copyindent
+
+set showmatch
+set shiftround
+set ruler
+set scrolloff=4
+
+set incsearch
+set ignorecase
+set smartcase
+
+set backspace=2
+set nu
+set hidden
+set mouse=a
+
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
+
+set shortmess=atI
+
+syn on
+
+let mapleader=","
+noremap <F2> :set hlsearch! hlsearch?<CR>
+
+set cmdheight=1
+
+if(isGui)
+  colo wombat
+else
+  colo wombat256mod
+endif
+
+set statusline=%f%m%r%h%w%<\ %{&ff}\ %Y\ %{fugitive#statusline()}\ %=%l/%L,%v\ %p%%
+set laststatus=2
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set nowrap
+
+" nerdtree settings
+map <C-k><C-b> :NERDTreeToggle<CR>
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" syntastic settings
+let g:syntastic_javascript_checkers = ['jshint']

@@ -36,3 +36,9 @@ fi
 if [[ ! -f $HOME/bin/initprj ]]; then
   ln -s $HOME/.initprj $HOME/bin/initprj && chmod +x $HOME/bin/initprj
 fi
+
+if [[ ! -h $HOME/.vim ]]; then
+  mv $HOME/.vim $HOME/.vim-backup
+  ln -s $HOME/src/dotfiles/vim $HOME/.vim
+fi
+
