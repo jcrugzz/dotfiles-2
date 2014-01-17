@@ -67,3 +67,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " syntastic settings
 let g:syntastic_javascript_checkers = ['jshint']
+
+" javascript settings
+au FileType javascript nnoremap <buffer> <leader>D  :<C-u>call WriteJSDocComment()<CR>
+

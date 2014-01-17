@@ -1,0 +1,16 @@
+Host obtrack
+    HostName obtrack.selfassembled.org
+    User ubuntu
+
+Host tron
+    HostName tron.robotholocaust.com
+
+Host toddifer
+  HostName travelshus.com
+  User ubuntu
+  IdentityFile ~/.ssh/toddifer.pem
+
+Host mail
+  HostName mail.selfassembled.org
+  User ubuntu
+  IdentityFile ~/.ssh/id_rsa
