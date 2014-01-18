@@ -42,3 +42,7 @@ if [[ ! -h $HOME/.vim ]]; then
   ln -s $HOME/src/dotfiles/vim $HOME/.vim
 fi
 
+if [[ ! -h $HOME/.ssh/config ]]; then
+  mv $HOME/.ssh/config $HOME/.ssh/config-backup
+  ln -s $HOME/src/dotfiles/ssh_config $HOME/.ssh/config
+fi

@@ -38,7 +38,7 @@
 	<integer>0</integer>
 	<key>DisksMenubar</key>
 	<array>
-		<string>BC4D43F0-0E76-3107-8EC6-1851F8D97867</string>
+		<string>3F59C262-99C1-30E6-87A5-32CAE5F27FEC</string>
 	</array>
 	<key>FanSpeedSets</key>
 	<array>
@@ -72,7 +72,7 @@
 	<integer>0</integer>
 	<key>SensorsMenubar</key>
 	<array>
-		<string>TC0D</string>
+		<string>TC0p</string>
 	</array>
 	<key>ShowLauncher</key>
 	<integer>1</integer>
@@ -83,7 +83,7 @@
 	<key>UseMono</key>
 	<integer>0</integer>
 	<key>_mac_id</key>
-	<string>c787b487f49f0db0670032a32f08defa</string>
+	<string>747e8d0b5006a4d8525e0d01f297be9e</string>
 	<key>cities</key>
 	<array>
 		<integer>1221</integer>

@@ -322,6 +322,9 @@ file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
 
+# pin to the start
+defaults write com.apple.dock pinning -string start
+
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
