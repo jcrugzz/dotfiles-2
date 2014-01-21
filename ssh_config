@@ -1,15 +1,19 @@
-Host obtrack
-    HostName obtrack.selfassembled.org
-    User ubuntu
-
 Host tron
-    HostName tron.robotholocaust.com
-
+  hostname tron.robotholocaust.com
+  user todd
+  IdentityFile ~/.ssh/id_rsa
+Host barnstormer
+  identityfile ~/.ssh/tk_key.pem
+  hostname barnstormer.selfassembled.org
+  user ubuntu
+Host copilot
+  hostname copilot-ci-srv01.conde.io
+  user tkennedy
+  IdentityFile ~/.ssh/id_rsa
 Host toddifer
   HostName travelshus.com
   User ubuntu
   IdentityFile ~/.ssh/toddifer.pem
-
 Host mail
   HostName mail.selfassembled.org
   User ubuntu
