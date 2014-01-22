@@ -18,3 +18,7 @@ Host mail
   HostName mail.selfassembled.org
   User ubuntu
   IdentityFile ~/.ssh/id_rsa
+Host php
+  HostName 192.168.1.6
+  User ubuntu
+  IdentityFile ~/.ssh/id_rsa
