@@ -141,7 +141,7 @@ function path_info (){
 }
 
 function vm-up () {
-	vboxmanage startvm PHP
+	vboxmanage startvm PHP --type headless
 }
 
 function vm-down () {
