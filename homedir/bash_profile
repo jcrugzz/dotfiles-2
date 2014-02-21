@@ -142,15 +142,11 @@ function path_info (){
 }
 
 function vm-up () {
-	prlctl start development
+	vboxmanage startvm PHP --type headless
 }
 
 function vm-down () {
-    prlctl suspend development
-}
-
-function vm-kill () {
-    prlctl stop development
+    vboxmanage controlvm PHP poweroff
 }
 
 function dev (){
