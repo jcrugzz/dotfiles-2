@@ -3,12 +3,15 @@
 	[
 		"Better CoffeeScript",
 		"BracketHighlighter",
+		"CoffeeComplete Plus (Autocompletion)",
 		"DocBlockr",
+		"Floobits",
 		"Git",
 		"JsFormat",
 		"JSHint Gutter",
 		"Markdown Preview",
 		"Theme - Flatland",
+		"Theme - itg.flat",
 		"Theme - Soda",
 		"TrailingSpaces"
 	]

@@ -37,6 +37,10 @@ if [[ ! -f $HOME/bin/initprj ]]; then
   ln -s $HOME/.initprj $HOME/bin/initprj && chmod +x $HOME/bin/initprj
 fi
 
+if [[ ! -f $HOME/bin/cnpm ]]; then
+  ln -s $HOME/.cnpm $HOME/bin/cnpm && chmod +x $HOME/bin/cnpm
+fi
+
 if [[ ! -h $HOME/.vim ]]; then
   mv $HOME/.vim $HOME/.vim-backup
   ln -s $HOME/src/dotfiles/vim $HOME/.vim
