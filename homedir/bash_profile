@@ -12,6 +12,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 PROMPT_COMMAND=prompt
 PS1="↳ "
 EDITOR=vim
+export DOCKER_HOST=tcp://localhost:4243
 
 source ~/Dropbox/SystemSync/git_complete.sh
 
@@ -171,12 +172,17 @@ function branch (){
 
 function pr (){
     ARGS=("$@")
+    DEST_BRANCH=development
 
     # do we need help?
     if [ "${ARGS[0]}" == "-h" ]
     then
         echo "pr MESSAGE PIVOTAL_TICKET_ID"
         return 0
+    fi
+
+    if [ -n "${ARGS[1]}" ]; then
+        DEST_BRANCH=${ARGS[1]}
     fi
 
     # are we in a git repo?
@@ -189,7 +195,7 @@ function pr (){
     GIT_REPO_NAME=$(basename `git rev-parse --show-toplevel`)
 
     # make the pull request and get the ID
-    PULL_URL=$(git pull-request "${ARGS[0]}" -b CondeNast:development -h CondeNast:$GIT_BRANCH)
+    PULL_URL=$(git pull-request -m "${ARGS[0]}" -b CondeNast:$DEST_BRANCH -h CondeNast:$GIT_BRANCH)
     echo "Pull request made: $PULL_URL"
     PULL_ID=$(echo $PULL_URL | cut -d/ -f 7)
 
