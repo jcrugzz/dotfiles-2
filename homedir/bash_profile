@@ -1,4 +1,4 @@
-PATH=/usr/local/sbin:/usr/local/share/npm/bin:~/bin:/usr/local/bin:$PATH
+PATH=/usr/local/sbin:~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 JAVA_HOME=/Library/Java/Home
 BLUE="\033[34m"
 LIGHT_GRAY="\033[0;37m"
@@ -48,6 +48,15 @@ alias td="tree -d -I node_modules"
 alias cnpm="npm --reg https://condenast.registry.nodejitsu.com"
 alias cpj="curl -X POST -H 'Content-type: application/json'"
 
+function gaa () {
+    FILES=$(gs --porcelain | awk '{ print $2 }')
+    echo $FILES | xargs git add $@
+}
+
+function gp () {
+    git push -u origin $(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p') $@
+}
+
 # install nice gitlog if it's not there...
 if [ -z "$(git config --global alias.lg)" ]; then
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -90,11 +99,6 @@ function prompt (){
     fi
 
     echo -ne "$SERV_INFO$CYAN$TIME_INFO$OFF $YELLOW$PATH_INFO$OFF$GIT_INFO\n$WORKSPACE_INFO"
-}
-
-function gp (){
-    BRANCH=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-    git push -u origin $BRANCH
 }
 
 function git_prompt (){
