@@ -1,4 +1,4 @@
-PATH=/usr/local/sbin:/usr/local/share/npm/bin:~/bin:/usr/local/bin:$PATH
+PATH=/usr/local/sbin:~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 JAVA_HOME=/Library/Java/Home
 BLUE="\033[34m"
 LIGHT_GRAY="\033[0;37m"
@@ -12,6 +12,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 PROMPT_COMMAND=prompt
 PS1="↳ "
 EDITOR=vim
+export DOCKER_HOST=tcp://localhost:4243
 
 source ~/Dropbox/SystemSync/git_complete.sh
 
@@ -46,6 +47,15 @@ alias cyay!='git push origin master && git push --tags && cnpm publish'
 alias td="tree -d -I node_modules"
 alias cnpm="npm --reg https://condenast.registry.nodejitsu.com"
 alias cpj="curl -X POST -H 'Content-type: application/json'"
+
+function gaa () {
+    FILES=$(gs --porcelain | awk '{ print $2 }')
+    echo $FILES | xargs git add $@
+}
+
+function gp () {
+    git push -u origin $(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p') $@
+}
 
 # install nice gitlog if it's not there...
 if [ -z "$(git config --global alias.lg)" ]; then
@@ -89,11 +99,6 @@ function prompt (){
     fi
 
     echo -ne "$SERV_INFO$CYAN$TIME_INFO$OFF $YELLOW$PATH_INFO$OFF$GIT_INFO\n$WORKSPACE_INFO"
-}
-
-function gp (){
-    BRANCH=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-    git push -u origin $BRANCH
 }
 
 function git_prompt (){
@@ -171,12 +176,17 @@ function branch (){
 
 function pr (){
     ARGS=("$@")
+    DEST_BRANCH=development
 
     # do we need help?
     if [ "${ARGS[0]}" == "-h" ]
     then
         echo "pr MESSAGE PIVOTAL_TICKET_ID"
         return 0
+    fi
+
+    if [ -n "${ARGS[1]}" ]; then
+        DEST_BRANCH=${ARGS[1]}
     fi
 
     # are we in a git repo?
@@ -189,7 +199,7 @@ function pr (){
     GIT_REPO_NAME=$(basename `git rev-parse --show-toplevel`)
 
     # make the pull request and get the ID
-    PULL_URL=$(git pull-request "${ARGS[0]}" -b CondeNast:development -h CondeNast:$GIT_BRANCH)
+    PULL_URL=$(git pull-request -m "${ARGS[0]}" -b CondeNast:$DEST_BRANCH -h CondeNast:$GIT_BRANCH)
     echo "Pull request made: $PULL_URL"
     PULL_ID=$(echo $PULL_URL | cut -d/ -f 7)
 

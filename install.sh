@@ -15,7 +15,7 @@ fi
 
 for DOTFILE in homedir/*; do
   DOT=$(echo $DOTFILE | cut -d '/' -f2)
-  if [[ -e $HOME/.$DOT ]]; then
+   if [[ -e $HOME/.$DOT ]]; then
     rm $HOME/.$DOT
   fi
   ln -s $CURR_DIR/$DOTFILE $HOME/.$DOT
@@ -32,6 +32,18 @@ done
 if [[ ! -d $HOME/bin ]]; then
   mkdir $HOME/bin
 fi
+
+if [[ ! -d $HOME/.atom ]]; then
+  mkdir $HOME/.atom
+fi
+
+for ATOMPREF in atom/*; do
+  ATOMFILE=$(echo $ATOMPREF | cut -d '/' -f2)
+  if [[ -e $HOME/.atom/$ATOMFILE ]]; then
+    rm $HOME/.atom/$ATOMFILE
+  fi
+  ln -s $CURR_DIR/$ATOMPREF $HOME/.atom/$ATOMFILE
+done
 
 if [[ ! -f $HOME/bin/initprj ]]; then
   ln -s $HOME/.initprj $HOME/bin/initprj && chmod +x $HOME/bin/initprj

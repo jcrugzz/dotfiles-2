@@ -1,0 +1,23 @@
+'exception-reporting':
+  'userId': '7bbb6976-6e85-8ef8-7548-447b0853f82c'
+'release-notes':
+  'viewedVersion': '0.64.0'
+'welcome':
+  'showOnStartup': false
+'metrics':
+  'userId': '09b0a73111833fb54a0a7559313d736ca48d233f'
+'editor':
+  'fontSize': 12
+  'showIndentGuide': true
+'core':
+  'themes': [
+    'atom-dark-ui'
+    'blackboard'
+  ]
+  'ignoredNames': [
+    '.git'
+    '.svn'
+    '.DS_Store'
+    'node_modules'
+  ]
+  'projectHome': '/Users/tkenned2/src'
