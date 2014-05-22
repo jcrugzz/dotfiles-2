@@ -1,7 +1,3 @@
-Host tron
-  hostname tron.robotholocaust.com
-  user todd
-  IdentityFile ~/.ssh/id_rsa
 Host barnstormer
   identityfile ~/.ssh/tk_key.pem
   hostname barnstormer.selfassembled.org
@@ -18,14 +14,7 @@ Host mail
   HostName mail.selfassembled.org
   User ubuntu
   IdentityFile ~/.ssh/id_rsa
-Host php
-  HostName 192.168.1.6
-  User ubuntu
+Host scripto
+  HostName 10.10.1.51
+  User todd
   IdentityFile ~/.ssh/id_rsa
-Host cnt
-  HostName copilot-ci-srv01.conde.io
-  User tkennedy
-  IdentityFile ~/.ssh/id_rsa
-Host buildbot
-  HostName 192.168.1.13 
-  User ubuntu

@@ -38,7 +38,7 @@
 	<integer>0</integer>
 	<key>DisksMenubar</key>
 	<array>
-		<string>9B408A69-9373-334E-953E-D7448F73D11E</string>
+		<string>3F59C262-99C1-30E6-87A5-32CAE5F27FEC</string>
 	</array>
 	<key>FanSpeedSets</key>
 	<array>
@@ -51,17 +51,11 @@
 					<key>fan</key>
 					<string>F0Ac</string>
 					<key>speed</key>
-					<integer>4050</integer>
-				</dict>
-				<dict>
-					<key>fan</key>
-					<string>F1Ac</string>
-					<key>speed</key>
-					<integer>3749</integer>
+					<integer>1919</integer>
 				</dict>
 			</array>
 			<key>uuid</key>
-			<string>34CF9AB4-E7AA-460C-9C58-0E0A051634FA</string>
+			<string>BAD2AD2D-40A1-48F9-9071-5BCB0B9A82FC</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -72,21 +66,17 @@
 					<key>fan</key>
 					<string>F0Ac</string>
 					<key>speed</key>
-					<integer>5940</integer>
-				</dict>
-				<dict>
-					<key>fan</key>
-					<string>F1Ac</string>
-					<key>speed</key>
-					<integer>5499</integer>
+					<integer>2640</integer>
 				</dict>
 			</array>
 			<key>uuid</key>
-			<string>4A41933D-3C38-4846-B0F5-F7A4061D2663</string>
+			<string>4BBD85B0-4CC9-4E2E-9AFA-532E7B07DE7C</string>
 		</dict>
 	</array>
 	<key>MemoryDisplayMode</key>
 	<string>3</string>
+	<key>MemoryIncludeInactive</key>
+	<integer>1</integer>
 	<key>NetworkDisplayMode</key>
 	<string>100,0,1</string>
 	<key>NetworkGraphMode</key>
@@ -99,7 +89,7 @@
 	<integer>0</integer>
 	<key>SensorsMenubar</key>
 	<array>
-		<string>TCXC</string>
+		<string>TC0p</string>
 	</array>
 	<key>ShowLauncher</key>
 	<integer>1</integer>
@@ -110,7 +100,7 @@
 	<key>UseMono</key>
 	<integer>0</integer>
 	<key>_mac_id</key>
-	<string>62ba15e15f0bf982d1079a0867befc0b</string>
+	<string>747e8d0b5006a4d8525e0d01f297be9e</string>
 	<key>cities</key>
 	<array>
 		<integer>1221</integer>
