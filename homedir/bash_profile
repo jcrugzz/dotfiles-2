@@ -40,9 +40,9 @@ alias gc="git checkout"
 alias gl="git lg"
 alias ga="git add"
 alias yay!='git push origin master && git push --tags && npm publish'
-alias cyay!='git push origin master && git push --tags && cnpm publish'
+alias syay!='git push origin master && git push --tags && snpm publish'
 alias td="tree -d -I node_modules"
-alias cnpm="npm --reg https://condenast.registry.nodejitsu.com"
+alias snpm="npm --reg http://registry.scripto.cc"
 alias cpj="curl -X POST -H 'Content-type: application/json'"
 
 function gaa () {

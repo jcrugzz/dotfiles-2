@@ -14,7 +14,11 @@ Host mail
   HostName mail.selfassembled.org
   User ubuntu
   IdentityFile ~/.ssh/id_rsa
-Host scripto
+Host scripto-dev
   HostName 10.10.1.51
+  User todd
+  IdentityFile ~/.ssh/id_rsa
+Host scripto-linode
+  HostName 173.255.193.245
   User todd
   IdentityFile ~/.ssh/id_rsa
