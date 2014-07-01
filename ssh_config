@@ -15,10 +15,13 @@ Host mail
   User ubuntu
   IdentityFile ~/.ssh/id_rsa
 Host scripto-dev
-  HostName 10.10.1.51
+  HostName 10.10.1.101
   User todd
   IdentityFile ~/.ssh/id_rsa
 Host scripto-linode
   HostName 173.255.193.245
   User todd
+  IdentityFile ~/.ssh/id_rsa
+Host colbert-prod
+  HostName 10.10.1.100
   IdentityFile ~/.ssh/id_rsa

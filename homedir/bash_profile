@@ -31,6 +31,10 @@ if [ -n "$(which hub)" ]; then
     alias git="/usr/local/bin/hub"
 fi
 
+if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  source /usr/local/etc/bash_completion.d/git-completion.bash
+fi
+
 #aliases
 alias dev="git checkout development && git pull"
 alias master="git checkout master && git pull"
