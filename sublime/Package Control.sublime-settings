@@ -6,17 +6,18 @@
 		"CoffeeComplete Plus (Autocompletion)",
 		"DocBlockr",
 		"Floobits",
+		"Gist",
 		"Git",
 		"GitHub Flavored Markdown Preview",
 		"Handlebars",
 		"JsFormat",
+		"JSHint",
 		"JSHint Gutter",
 		"Markdown Preview",
 		"Sass",
 		"Slate",
 		"Theme - Flatland",
 		"Theme - itg.flat",
-		"Theme - Soda",
-		"TrailingSpaces"
+		"Theme - Soda"
 	]
 }

@@ -21,13 +21,19 @@
 		"components",
 		".build",
 		".hg",
-		"node_modules"
+		"node_modules",
+		"build",
+		".vagrant",
+		"scripto*/var",
+		"scripto*/src"
 	],
 	"font_face": "Menlo",
 	"font_size": 12,
 	"highlight_line": true,
 	"ignored_packages":
 	[
+		"Markdown Preview",
+		"JSHint Gutter",
 		"Vintage"
 	],
 	"indent_to_bracket": true,
