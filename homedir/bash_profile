@@ -35,6 +35,12 @@ if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
   source /usr/local/etc/bash_completion.d/git-completion.bash
 fi
 
+
+if [ -n "$(which npm)" ]; then
+    npm config set loglevel http
+    npm config set save-prefix '~'
+fi
+
 #aliases
 alias dev="git checkout development && git pull"
 alias master="git checkout master && git pull"
@@ -48,6 +54,10 @@ alias syay!='git push origin master && git push --tags && snpm publish'
 alias td="tree -d -I node_modules"
 alias snpm="npm --reg http://registry.scripto.cc"
 alias cpj="curl -X POST -H 'Content-type: application/json'"
+
+function vm() {
+  vmrun -T fusion $@ /Users/todd/Documents/Virtual\ Machines.localized/scripto.vmwarevm nogui
+}
 
 function gaa () {
     FILES=$(gs --porcelain | awk '{ print $2 }')
@@ -82,22 +92,25 @@ then
 fi
 
 function vms(){
-    VMNAME=" "
-    if [[ -d .vagrant ]]; then
-        for MACHINE in `ls .vagrant/machines`; do
-            IDFILE=".vagrant/machines/$MACHINE/virtualbox/id";
-            if [ -f $IDFILE ]; then
-                ID=$(cat $IDFILE);
-                VMNAME=$(vboxmanage list runningvms| grep $ID | awk -F'["_]' '{print $2}');
-            fi
-        done
+    if [[ -n $(which vboxmanage) ]]; then
 
-        if [ "$VMNAME" != "" ]; then
-            if [ "$VMNAME" != " " ]; then
-                echo -e "$GREEN vm:$VMNAME$OFF"
+        VMNAME=" "
+        if [[ -d .vagrant ]]; then
+            for MACHINE in `ls .vagrant/machines`; do
+                IDFILE=".vagrant/machines/$MACHINE/virtualbox/id";
+                if [ -f $IDFILE ]; then
+                    ID=$(cat $IDFILE);
+                    VMNAME=$(vboxmanage list runningvms| grep $ID | awk -F'["_]' '{print $2}');
+                fi
+            done
+
+            if [ "$VMNAME" != "" ]; then
+                if [ "$VMNAME" != " " ]; then
+                    echo -e "$GREEN vm:$VMNAME$OFF"
+                fi
+            else
+                echo -e "$GREEN vm:off$OFF"
             fi
-        else
-            echo -e "$GREEN vm:off$OFF"
         fi
     fi
 }

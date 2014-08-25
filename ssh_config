@@ -2,8 +2,8 @@ Host barnstormer
   identityfile ~/.ssh/tk_key.pem
   hostname barnstormer.selfassembled.org
   user ubuntu
-Host copilot
-  hostname copilot-ci-srv01.conde.io
+Host conde-migration
+  hostname cntmig-ci-srv01.conde.io
   user tkennedy
   IdentityFile ~/.ssh/id_rsa
 Host toddifer
@@ -25,3 +25,7 @@ Host scripto-linode
 Host colbert-prod
   HostName 10.10.1.100
   IdentityFile ~/.ssh/id_rsa
+Host scripto
+  HostName 192.168.174.129
+  IdentityFile ~/.ssh/id_rsa
+  User todd 
