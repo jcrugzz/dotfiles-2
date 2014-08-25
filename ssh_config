@@ -26,6 +26,6 @@ Host colbert-prod
   HostName 10.10.1.100
   IdentityFile ~/.ssh/id_rsa
 Host scripto
-  HostName 192.168.174.129
-  IdentityFile ~/.ssh/id_rsa
   User todd 
+  HostName 192.168.153.128
+  IdentityFile ~/.ssh/id_rsa
