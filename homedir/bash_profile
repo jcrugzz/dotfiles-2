@@ -12,6 +12,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 PROMPT_COMMAND=prompt
 PS1="↳ "
 EDITOR=vim
+GOPATH=$HOME/go
 
 # source appropriate environment info
 if [ -d ~/.python ]; then
@@ -246,7 +247,10 @@ function pr (){
     echo "Done"
 }
 
-export PATH PS1 JAVA_HOME EDITOR
+export PATH PS1 JAVA_HOME EDITOR GOPATH
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export NVM_DIR="/Users/todd/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -1,11 +1,4 @@
-Host barnstormer
-  identityfile ~/.ssh/tk_key.pem
-  hostname barnstormer.selfassembled.org
-  user ubuntu
-Host conde-migration
-  hostname cntmig-ci-srv01.conde.io
-  user tkennedy
-  IdentityFile ~/.ssh/id_rsa
+# personal
 Host toddifer
   HostName travelshus.com
   User ubuntu
@@ -14,6 +7,8 @@ Host mail
   HostName mail.selfassembled.org
   User ubuntu
   IdentityFile ~/.ssh/id_rsa
+
+# scripto owned
 Host scripto-dev
   HostName 10.10.1.101
   User todd
@@ -22,10 +17,8 @@ Host scripto-linode
   HostName 173.255.193.245
   User todd
   IdentityFile ~/.ssh/id_rsa
-Host colbert-prod
-  HostName 10.10.1.100
-  IdentityFile ~/.ssh/id_rsa
 Host scripto
   HostName 192.168.174.129
   IdentityFile ~/.ssh/id_rsa
-  User todd 
+  User todd
+

@@ -5,18 +5,21 @@
 		"BracketHighlighter",
 		"CoffeeComplete Plus (Autocompletion)",
 		"DocBlockr",
-		"Floobits",
+		"EditorConfig",
 		"Git",
 		"GitHub Flavored Markdown Preview",
+		"GoSublime",
 		"Handlebars",
+		"HTML Mustache",
 		"JsFormat",
 		"JSHint Gutter",
+		"Markdown Extended",
 		"Markdown Preview",
+		"Modific",
 		"Sass",
 		"Slate",
 		"Theme - Flatland",
 		"Theme - itg.flat",
-		"Theme - Soda",
-		"TrailingSpaces"
+		"Theme - Soda"
 	]
 }

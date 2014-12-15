@@ -1,5 +1,6 @@
 {
 	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+	"draw_white_space": "all",
 	"file_exclude_patterns":
 	[
 		"*pyc",
@@ -21,10 +22,15 @@
 		"components",
 		".build",
 		".hg",
-		"node_modules"
+		".vagrant",
+		"node_modules",
+		"build",
+		"src",
+		"scriptoDB",
+		"dist"
 	],
-	"font_face": "Menlo",
-	"font_size": 12,
+	"font_face": "Anonymous Pro",
+	"font_size": 14,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -35,11 +41,12 @@
 	[
 		80
 	],
+	"scroll_past_end": true,
 	"tab_size": 2,
 	"theme": "Flatland Dark.sublime-theme",
-	"trailing_spaces_highlight_color": "",
-	"trailing_spaces_trim_on_save": true,
+	"trailing_spaces_highlight_color": "red",
+	"trailing_spaces_trim_on_save": false,
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true,
+	"trim_trailing_white_space_on_save": false,
 	"word_wrap": false
 }
