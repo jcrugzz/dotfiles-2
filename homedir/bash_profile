@@ -7,6 +7,7 @@ GREEN="\033[0;32m"
 MAGENTA="\033[0;35m"
 YELLOW="\033[0;33m"
 CYAN="\033[0;36m"
+RED="\033[0;31m"
 OFF="\033[0m"
 VIRTUAL_ENV_DISABLE_PROMPT=true
 PROMPT_COMMAND=prompt
@@ -57,7 +58,11 @@ alias snpm="npm --reg http://registry.scripto.cc"
 alias cpj="curl -X POST -H 'Content-type: application/json'"
 
 function vm() {
-  vmrun -T fusion $@ /Users/todd/Documents/Virtual\ Machines.localized/scripto.vmwarevm nogui
+  VMFILE="/Users/todd/Documents/Virtual Machines.localized/scripto.vmwarevm"
+  if [ -f" /Users/todd/Documents/Virtual Machines.localized/Ubuntu 64-bit Server 14.04.1.vmwarevm" ]; then
+    VMFILE="/Users/todd/Documents/Virtual Machines.localized/Ubuntu 64-bit Server 14.04.1.vmwarevm"
+  fi
+  vmrun -T fusion $@ "$VMFILE" nogui
 }
 
 function gaa () {
@@ -144,7 +149,7 @@ function git_prompt (){
     fi
 
     UNCOMMITTED=$($GIT status --porcelain --untracked-files=no)
-    UNADDED=$($GIT ls-files --other --exclude-standard --directory)
+    UNADDED=$($GIT ls-files --other --exclude-standard --directory --no-empty-directory)
     BRANCH=$($GIT branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
     UNPUSHED=$($GIT diff origin/$BRANCH 2>/dev/null)
     GIT_PROMPT=$BRANCH
@@ -152,19 +157,19 @@ function git_prompt (){
 
     if [ -n "$UNCOMMITTED" ]
     then
-        GIT_PROMPT="$GIT_PROMPT \xe2\x98\xb9"
+        GIT_PROMPT="$GIT_PROMPT"
         PROMPT_COLOR=$CYAN
     fi
 
     if [ -n "$UNADDED" ]
     then
-        GIT_PROMPT="$GIT_PROMPT \xe2\x98\xa3"
-        PROMPT_COLOR=$MAGENTA
+        GIT_PROMPT="$GIT_PROMPT"
+        PROMPT_COLOR=$RED
     fi
 
     if [ -z "$UNCOMMITTED" ] && [ -z "$UNADDED" ]
     then
-        GIT_PROMPT="$GIT_PROMPT \xe2\x9c\x94"
+        GIT_PROMPT="$GIT_PROMPT"
     fi
 
     echo -e ":$PROMPT_COLOR$GIT_PROMPT$OFF"
