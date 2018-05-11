@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-var ${1:package} = require('${2:package}');
-
-]]></content>
-  <tabTrigger>req</tabTrigger>
-  <scope>source.js</scope>
-</snippet>

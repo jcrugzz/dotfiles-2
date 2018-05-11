@@ -1,74 +1,27 @@
-PATH=/usr/local/sbin:~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
-JAVA_HOME=/Library/Java/Home
-BLUE="\033[34m"
-LIGHT_GRAY="\033[0;37m"
-CYAN="\033[0;36m"
-GREEN="\033[0;32m"
-MAGENTA="\033[0;35m"
-YELLOW="\033[0;33m"
-CYAN="\033[0;36m"
-RED="\033[0;31m"
-OFF="\033[0m"
+PATH=~/bin:/usr/local/bin:$PATH
+BLUE="\[\033[34m\]"
+LIGHT_GRAY="\[\033[0;37m\]"
+CYAN="\[\033[0;36m\]"
+GREEN="\[\033[0;32m\]"
+MAGENTA="\[\033[0;35m\]"
+YELLOW="\[\033[0;33m\]"
+CYAN="\[\033[0;36m\]"
+RED="\[\033[0;31m\]"
+OFF="\[\033[0m\]"
 VIRTUAL_ENV_DISABLE_PROMPT=true
-PROMPT_COMMAND=prompt
-PS1="↳ "
 EDITOR=vim
+PS1="$YELLOW\w$OFF\$(git_prompt)\$(server_info)\n[$CYAN\D{%H:%M:%S}$OFF] \$ "
 GOPATH=$HOME/go
+TERMINAL=gnome-terminal
 
-# source appropriate environment info
-if [ -d ~/.python ]; then
-    source ~/.python/bin/activate
-fi
-
-if [ -f ~/.tokens ]; then
-    source ~/.tokens
-fi
-
-if [ -n "$(which brew)" ]; then
-    [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-fi
-
-# do we have hub available?
-if [ -n "$(which hub)" ]; then
-    alias git="/usr/local/bin/hub"
-fi
-
-if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-  source /usr/local/etc/bash_completion.d/git-completion.bash
-fi
-
-
-if [ -n "$(which npm)" ]; then
-    npm config set loglevel http
-    npm config set save-prefix '~'
-fi
+eval `keychain --eval --agents ssh id_rsa id_ed25519`
 
 #aliases
-alias dev="git checkout development && git pull"
-alias master="git checkout master && git pull"
 alias gs="git status"
 alias gd="git diff"
-alias gc="git checkout"
 alias gl="git lg"
-alias ga="git add"
 alias yay!='git push origin master && git push --tags && npm publish'
-alias syay!='git push origin master && git push --tags && snpm publish'
-alias td="tree -d -I node_modules"
-alias snpm="npm --reg http://registry.scripto.cc"
-alias cpj="curl -X POST -H 'Content-type: application/json'"
-
-function vm() {
-  VMFILE="/Users/todd/Documents/Virtual Machines.localized/scripto.vmwarevm"
-  if [ -f" /Users/todd/Documents/Virtual Machines.localized/Ubuntu 64-bit Server 14.04.1.vmwarevm" ]; then
-    VMFILE="/Users/todd/Documents/Virtual Machines.localized/Ubuntu 64-bit Server 14.04.1.vmwarevm"
-  fi
-  vmrun -T fusion $@ "$VMFILE" nogui
-}
-
-function gaa () {
-    FILES=$(gs --porcelain | awk '{ print $2 }')
-    echo $FILES | xargs git add $@
-}
+alias rmnm="rm -rf node_modules/ && npm install"
 
 function gp () {
     git push -u origin $(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p') $@
@@ -79,68 +32,16 @@ if [ -z "$(git config --global alias.lg)" ]; then
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 fi
 
-# Linux and BSD have some differences in ls
-MACH_TYPE=$(uname)
-if [ "$MACH_TYPE" == "Linux" ]; then
-    alias dir="ls -ltF --color=auto"
-elif [ "$MACH_TYPE" == "Darwin" ]; then
-    alias preview="open -F -a /Applications/Preview.app"
-    alias chrome="open -a /Applications/Google\ Chrome.app"
-    alias excel="open -a /Applications/Microsoft\ Office\ 2011/Microsoft\ Excel.app"
-    alias dir="ls -lthFG"
-fi
+alias dir="ls -ltF --color=auto"
 
-# do we have a keychain manager?
-if [ -n "$(which keychain)" ]
-then
-    keychain id_rsa
-    . ~/.keychain/`uname -n`-sh
-fi
-
-function vms(){
-    if [[ -n $(which vboxmanage) ]]; then
-
-        VMNAME=" "
-        if [[ -d .vagrant ]]; then
-            for MACHINE in `ls .vagrant/machines`; do
-                IDFILE=".vagrant/machines/$MACHINE/virtualbox/id";
-                if [ -f $IDFILE ]; then
-                    ID=$(cat $IDFILE);
-                    VMNAME=$(vboxmanage list runningvms| grep $ID | awk -F'["_]' '{print $2}');
-                fi
-            done
-
-            if [ "$VMNAME" != "" ]; then
-                if [ "$VMNAME" != " " ]; then
-                    echo -e "$GREEN vm:$VMNAME$OFF"
-                fi
-            else
-                echo -e "$GREEN vm:off$OFF"
-            fi
-        fi
-    fi
+function server_info {
+  SERV_INFO=""
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
+  then SERV_INFO="$(hostname)@$(whoami)"
+  fi
+  echo -ne "$SERV_INFO"
 }
 
-function prompt (){
-    GIT_INFO=$(git_prompt)
-    PATH_INFO=$(path_info)
-    USER_INFO=$(whoami)
-    HOST_INFO=$(hostname)
-    TIME_INFO=$(date +%H:%M:%S)
-    SERV_INFO=""
-    VM_INFO=$(vms)
-
-    if [[ `type -t cnscm_get_workspace_name` == 'function' ]]
-        then WORKSPACE_INFO="Workspace: $GREEN$(cnscm_get_workspace_name)$OFF\n"
-    fi
-
-
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
-        then SERV_INFO="$USER_INFO@$HOST_INFO "
-    fi
-
-    echo -ne "$SERV_INFO$CYAN$TIME_INFO$OFF $YELLOW$PATH_INFO$OFF$GIT_INFO$VM_INFO\n"
-}
 
 function git_prompt (){
     GIT=$(which git)
@@ -153,18 +54,18 @@ function git_prompt (){
     BRANCH=$($GIT branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
     UNPUSHED=$($GIT diff origin/$BRANCH 2>/dev/null)
     GIT_PROMPT=$BRANCH
-    PROMPT_COLOR=$GREEN
+    PROMPT_COLOR="\033[0;32m"
 
     if [ -n "$UNCOMMITTED" ]
     then
         GIT_PROMPT="$GIT_PROMPT"
-        PROMPT_COLOR=$CYAN
+        PROMPT_COLOR="\033[0;36m"
     fi
 
     if [ -n "$UNADDED" ]
     then
         GIT_PROMPT="$GIT_PROMPT"
-        PROMPT_COLOR=$RED
+        PROMPT_COLOR="\033[0;31m"
     fi
 
     if [ -z "$UNCOMMITTED" ] && [ -z "$UNADDED" ]
@@ -172,90 +73,13 @@ function git_prompt (){
         GIT_PROMPT="$GIT_PROMPT"
     fi
 
-    echo -e ":$PROMPT_COLOR$GIT_PROMPT$OFF"
+    echo -e ":$PROMPT_COLOR$GIT_PROMPT\033[0m"
 }
 
-function path_info (){
-    pwd_length=10
-    pwd_symbol="..."
-    newPWD="${PWD/#$HOME/~}"
-    if [ $(echo -n $newPWD | wc -c | tr -d " ") -gt $pwd_length ]
-    then
-        newPWD=$(echo -n $newPWD | awk -F '/' '{print $1 "/" $2 "/.../" $(NF-1) "/" $(NF)}')
-    fi
+export PATH PS1 EDITOR TERMINAL
 
-    echo -e $newPWD
-}
-
-function dev (){
-    git checkout dev && git pull
-}
-
-function branch (){
-    args=("$@")
-
-    if [ -n "${args[1]}" ]
-    then
-        git stash
-    fi
-
-    git checkout dev && git pull && git checkout -b ${args[0]}
-
-    if [ -n "${args[1]}" ]
-    then
-        git stash pop
-    fi
-}
-
-function pr (){
-    ARGS=("$@")
-    DEST_BRANCH=development
-
-    # do we need help?
-    if [ "${ARGS[0]}" == "-h" ]
-    then
-        echo "pr MESSAGE PIVOTAL_TICKET_ID"
-        return 0
-    fi
-
-    if [ -n "${ARGS[1]}" ]; then
-        DEST_BRANCH=${ARGS[1]}
-    fi
-
-    # are we in a git repo?
-    GIT_BRANCH=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
-        echo "You're not in a git repo..."
-        return 0
-    fi
-
-    GIT_REPO_NAME=$(basename `git rev-parse --show-toplevel`)
-
-    # make the pull request and get the ID
-    PULL_URL=$(git pull-request -m "${ARGS[0]}" -b CondeNast:$DEST_BRANCH -h CondeNast:$GIT_BRANCH)
-    echo "Pull request made: $PULL_URL"
-    PULL_ID=$(echo $PULL_URL | cut -d/ -f 7)
-
-    # do we have a pivotal ticket o deal with?
-    if [ -n ${ARGS[1]} ]
-    then
-        echo "Updating Pivotal..."
-        # UPDATE PIVOTAL...
-        PIVOTAL_RESPONSE=$(curl -s -H "X-TrackerToken: $PIVOTAL_ACCESS" -X POST -H "Content-type: application/xml" -d "<note><text>$PULL_URL</text></note>" https://www.pivotaltracker.com/services/v3/projects/$PIVOTAL_PROJECT_ID/stories/${ARGS[1]}/notes)
-
-        echo "Updating Github..."
-        # UPDATE GITHUB...
-        PAYLOAD="{\"body\": \"https://www.pivotaltracker.com/story/show/${ARGS[1]}\"}"
-        GIT_URL="https://api.github.com/repos/condenast/$GIT_REPO_NAME/pulls/$PULL_ID"
-        GIT_RESPONSE=$(curl -s -X PATCH -H "Content-type: application/json" -H "Authorization: token $GITHUB_ACCESS" -d "$PAYLOAD" $GIT_URL)
-    fi
-    echo "Done"
-}
-
-export PATH PS1 JAVA_HOME EDITOR GOPATH
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export NVM_DIR="/Users/todd/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source /usr/share/nvm/init-nvm.sh
+nvm use 8
+if [ -f /usr/share/autojump/autojump.bash ]; then
+  source /usr/share/autojump/autojump.bash
+fi

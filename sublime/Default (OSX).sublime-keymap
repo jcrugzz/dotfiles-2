@@ -1,3 +1,0 @@
-[
-  { "keys": ["control+shift+p"], "command": "markdown_preview", "args": {"parser": "github", "target": "browser"} }
-]
