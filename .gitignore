@@ -1,3 +1,2 @@
-.DS_Store
-preferences/com.mizage.direct.Divvy.plist
-sublime/Package Control.last-run
+*.sw?
+.envrc
