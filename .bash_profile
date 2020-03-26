@@ -1,4 +1,4 @@
-PATH=~/bin:/usr/local/bin:$PATH
+PATH=~/bin:/usr/local/bin:$HOME/.yarn/bin:$PATH
 BLUE="\[\033[34m\]"
 LIGHT_GRAY="\[\033[0;37m\]"
 CYAN="\[\033[0;36m\]"
@@ -11,75 +11,84 @@ OFF="\[\033[0m\]"
 VIRTUAL_ENV_DISABLE_PROMPT=true
 EDITOR=vim
 PS1="$YELLOW\w$OFF\$(git_prompt)\$(server_info)\n[$CYAN\D{%H:%M:%S}$OFF] \$ "
-GOPATH=$HOME/go
 TERMINAL=gnome-terminal
-
-eval `keychain --eval --agents ssh id_rsa id_ed25519`
+TERM=xterm-256color
+umask 002
 
 #aliases
 alias gs="git status"
 alias gd="git diff"
 alias gl="git lg"
-alias yay!='git push origin master && git push --tags && npm publish'
 alias rmnm="rm -rf node_modules/ && npm install"
 
-function gp () {
-    git push -u origin $(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p') $@
-}
+if [ "$(uname)" = "Darwin" ]; then
+  alias dir="ls -lGFht"
+else
+  alias dir="ls -ltF --color=auto"
+fi
 
 # install nice gitlog if it's not there...
 if [ -z "$(git config --global alias.lg)" ]; then
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 fi
 
-alias dir="ls -ltF --color=auto"
+if [ -z "$(git config --global alias.co)" ]; then
+    git config --global alias.co "checkout"
+fi
+
+function gp () {
+    git push -u origin $(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p') $@
+}
 
 function server_info {
   SERV_INFO=""
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
   then SERV_INFO="$(hostname)@$(whoami)"
+  else SERV_INFO="$(hostname)"
   fi
-  echo -ne "$SERV_INFO"
+  echo -ne " on $SERV_INFO"
 }
 
+GIT=$(which git)
 
 function git_prompt (){
-    GIT=$(which git)
     if ! $GIT rev-parse --git-dir > /dev/null 2>&1; then
         return 0
     fi
 
-    UNCOMMITTED=$($GIT status --porcelain --untracked-files=no)
+    UNCOMMITED=$($GIT diff-index --quiet HEAD --)
     UNADDED=$($GIT ls-files --other --exclude-standard --directory --no-empty-directory)
     BRANCH=$($GIT branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-    UNPUSHED=$($GIT diff origin/$BRANCH 2>/dev/null)
     GIT_PROMPT=$BRANCH
     PROMPT_COLOR="\033[0;32m"
 
     if [ -n "$UNCOMMITTED" ]
     then
-        GIT_PROMPT="$GIT_PROMPT"
         PROMPT_COLOR="\033[0;36m"
     fi
 
     if [ -n "$UNADDED" ]
     then
-        GIT_PROMPT="$GIT_PROMPT"
         PROMPT_COLOR="\033[0;31m"
-    fi
-
-    if [ -z "$UNCOMMITTED" ] && [ -z "$UNADDED" ]
-    then
-        GIT_PROMPT="$GIT_PROMPT"
     fi
 
     echo -e ":$PROMPT_COLOR$GIT_PROMPT\033[0m"
 }
 
-export PATH PS1 EDITOR TERMINAL
-
-source /usr/share/nvm/init-nvm.sh
-nvm use 8
-if [ -f /usr/share/autojump/autojump.bash ]; then
-  source /usr/share/autojump/autojump.bash
+if command -v brew >> /dev/null; then
+  [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ] && . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
+
+if command -v keychain >> /dev/null; then
+  eval `keychain --agents ssh,gpg --eval ~/.ssh/id_ed25519 1AA3B907E66847B5`
+fi
+
+[ -f $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
+[ -f $HOME/.asdf/asdf/completions/asdf.bash ] && . $HOME/.asdf/completions/asdf.bash
+if command -v direnv >> /dev/null; then
+  eval "$(direnv hook bash)"
+fi
+
+export GPG_TTY=$(tty)
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH PS1 EDITOR TERMINAL
