@@ -80,7 +80,12 @@ if command -v brew >> /dev/null; then
 fi
 
 if command -v keychain >> /dev/null; then
-  eval `keychain --agents ssh,gpg --eval ~/.ssh/id_ed25519 1AA3B907E66847B5`
+  eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
+  if [ -f $HOME/.no-gpg ]; then
+    echo "No GPG agent loaded"
+  else
+    eval `keychain --agents gpg --eval 1AA3B907E66847B5`
+  fi
 fi
 
 [ -f $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
