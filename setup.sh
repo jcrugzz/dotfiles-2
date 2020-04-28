@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 DOTFILE_SRC=$(dirname "${BASH_SOURCE[0]}")
+if [ "$DOTFILE_SRC" = "." ]; then
+  DOTFILE_SRC=$PWD
+fi
+
+echo Source $DOTFILE_SRC
 
 mkdir -p $HOME/.vim
 if [ -L $HOME/.vim/coc-settings.json ]; then
