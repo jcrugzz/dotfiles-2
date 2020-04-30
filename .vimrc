@@ -227,6 +227,12 @@ set nowritebackup
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+let g:coc_global_extensions = [
+  \ "coc-solargraph", 
+  \ "coc-json",
+  \ "coc-tsserver",
+  \ ]
+
 " use tab for trigger completion with characters
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
@@ -274,7 +280,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
