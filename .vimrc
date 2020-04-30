@@ -68,8 +68,9 @@ Plug 'tomasr/molokai'
 
 " Language support
 
-" go
+" go, yeah i get it, our dev instances are fucking hold stop nagging
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
+let g:go_version_warning = 0
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'
