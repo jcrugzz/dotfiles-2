@@ -29,5 +29,5 @@ for DOTFILE in $(find $DOTFILE_SRC -type f -name ".*"); do
 done
 
 if which git >> /dev/null ; then
-  git clone https://github.com/tmux-plugins/tmp ~/.tmux/plugins/tpm
+  git clone git://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
