@@ -27,7 +27,3 @@ for DOTFILE in $(find $DOTFILE_SRC -type f -name ".*"); do
     ln -s $DOTFILE $HOME/$FN
   fi
 done
-
-if which git >> /dev/null ; then
-  git clone git://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
