@@ -21,10 +21,28 @@ alias gd="git diff"
 alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
 
-if [ "$(uname)" = "Darwin" ]; then
-  alias dir="ls -lGFht"
+if which exa >> /dev/null; then
+  alias ls="exa"
+  alias dir="exa -lm"
 else
-  alias dir="ls -ltF --color=auto"
+  if [ "$(uname)" = "Darwin" ]; then
+    alias dir="ls -lGFht"
+  else
+    alias dir="ls -ltF --color=auto"
+  fi
+fi
+
+if which btm >> /dev/null; then
+  alias top="btm"
+  alias htop="btm"
+fi
+
+if which fd >> /dev/null; then
+  alias find="fd"
+fi
+
+if which bat >> /dev/null; then
+  alias cat="bat"
 fi
 
 # install nice gitlog if it's not there...
@@ -83,8 +101,9 @@ if command -v keychain >> /dev/null; then
   eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
   if [ -f $HOME/.no-gpg ]; then
     echo "No GPG agent loaded"
-  else
-    eval `keychain --agents gpg --eval 1AA3B907E66847B5`
+  elif [ -f $HOME/.gpg-key ]; then
+    GPG_KEY=$(cat $HOME/.gpg-key)
+    eval `keychain --agents gpg --eval $GPG_KEY` 
   fi
 fi
 

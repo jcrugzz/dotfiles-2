@@ -4,7 +4,7 @@
 [user]
 	name = Todd Kennedy
 	email = todd@selfassembled.org
-	signingKey = 1AA3B907E66847B5
+	signingKey = F6E034DD603A6861
 [commit]
 	gpgsign = true
 [mergetool "Kaleidoscope"]
@@ -25,3 +25,6 @@
 	driver = npx npm-merge-driver merge %A %O %B %P
 [core]
 	excludesfile = /Users/toddkennedy/.gitignore
+  pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+[interactive]
+  diffFilter = delta --color-only
