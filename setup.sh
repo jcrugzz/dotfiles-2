@@ -7,7 +7,7 @@ fi
 echo Source $DOTFILE_SRC
 
 if which dpkg >> /dev/null; then
-  for PKG in ./deb_pkgs; do
+  for PKG in $DOTFILE_SRC/deb_pkgs; do
     sudo dpkg -i $PKG
   done
 fi
