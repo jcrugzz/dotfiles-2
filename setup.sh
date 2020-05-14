@@ -7,9 +7,7 @@ fi
 echo Source $DOTFILE_SRC
 
 if which dpkg >> /dev/null; then
-  for PKG in $DOTFILE_SRC/deb_pkgs/*; do
-    sudo dpkg -i $PKG
-  done
+  sudo dpkg -i $DOTFILE_SRC/dep_pkgs/*
 fi
 
 setup_vim () {
