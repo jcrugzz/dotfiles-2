@@ -45,6 +45,14 @@ if which bat >> /dev/null; then
   alias cat="bat"
 fi
 
+if which delta >> /dev/null; then
+  git config --global core.pager "delta --theme='Dracula'"
+  git config --global interactive.diffFilter "delta --color-only"
+else 
+  git config --global --unset core.pager
+  git config --global --unset interactive.diffFilter
+fi
+
 # install nice gitlog if it's not there...
 if [ -z "$(git config --global alias.lg)" ]; then
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"

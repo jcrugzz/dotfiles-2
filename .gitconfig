@@ -25,6 +25,6 @@
 	driver = npx npm-merge-driver merge %A %O %B %P
 [core]
 	excludesfile = /Users/toddkennedy/.gitignore
-  pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+	pager = delta --theme='Dracula'
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
