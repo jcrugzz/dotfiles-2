@@ -20,7 +20,7 @@ setup_vim () {
     echo "Linking $PWD/coc-settings.json to ${HOME}/.vim/coc-settings.json"
     ln -s $PWD/coc-settings.json $HOME/.vim/coc-settings.json
   fi
-  vim -es -u $HOME/.vimrc -c "PlugInstall | qa!"
+  vim +PlugInstall +qa
 }
 
 setup_dotfiles () {
