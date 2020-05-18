@@ -20,6 +20,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
+alias svim="vim +PlugInstall +qa"
 
 if which exa >> /dev/null; then
   alias ls="exa"
