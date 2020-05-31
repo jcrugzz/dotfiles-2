@@ -24,7 +24,7 @@ alias svim="vim +PlugInstall +qa"
 
 if which exa >> /dev/null; then
   alias ls="exa"
-  alias dir="exa -lm"
+  alias dir="exa -lmFh --git"
 else
   if [ "$(uname)" = "Darwin" ]; then
     alias dir="ls -lGFht"
