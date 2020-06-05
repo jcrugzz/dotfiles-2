@@ -7,19 +7,10 @@
 	signingKey = F6E034DD603A6861
 [commit]
 	gpgsign = true
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
-[merge]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
 [mergetool]
 	prompt = false
-[diff]
-	tool = Kaleidoscope
 [merge "npm-merge-driver"]
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
@@ -28,5 +19,3 @@
 	pager = delta --theme='Dracula'
 [interactive]
 	diffFilter = delta --color-only
-[url "git@github.com:"]
-	insteadOf = https://github.com/

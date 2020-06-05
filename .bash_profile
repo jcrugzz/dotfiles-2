@@ -22,7 +22,7 @@ alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
 alias svim="vim +PlugInstall +qa"
 
-if which exa >> /dev/null; then
+if command -v exa >> /dev/null; then
   alias ls="exa"
   alias dir="exa -lmFh --git"
 else
@@ -33,20 +33,20 @@ else
   fi
 fi
 
-if which btm >> /dev/null; then
+if command -v btm >> /dev/null; then
   alias top="btm"
   alias htop="btm"
 fi
 
-if which fd >> /dev/null; then
+if command -v fd >> /dev/null; then
   alias find="fd"
 fi
 
-if which bat >> /dev/null; then
+if command -v bat >> /dev/null; then
   alias cat="bat"
 fi
 
-if which delta >> /dev/null; then
+if command -v delta >> /dev/null; then
   git config --global core.pager "delta --theme='Dracula'"
   git config --global interactive.diffFilter "delta --color-only"
 else 
@@ -107,13 +107,20 @@ if command -v brew >> /dev/null; then
 fi
 
 if command -v keychain >> /dev/null; then
-  eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
+  [ -f $HOME/.ssh/id_ed22519 ] && eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
   if [ -f $HOME/.no-gpg ]; then
     echo "No GPG agent loaded"
+    $GIT config --global --unset commit.gpgsign
+    $GIT config --global --unset user.signingKey
   elif [ -f $HOME/.gpg-key ]; then
     GPG_KEY=$(cat $HOME/.gpg-key)
     eval `keychain --agents gpg --eval $GPG_KEY` 
+    $GIT config --global commit.gpgsign true
+    $GIT config --global user.signingKey $GPG_KEY
   fi
+else 
+  $GIT config --global --unset commit.gpgsign
+  $GIT config --global --unset user.signingKey
 fi
 
 [ -f $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
