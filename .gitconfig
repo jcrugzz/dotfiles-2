@@ -4,9 +4,6 @@
 [user]
 	name = Todd Kennedy
 	email = todd@selfassembled.org
-	signingKey = F6E034DD603A6861
-[commit]
-	gpgsign = true
 [difftool]
 	prompt = false
 [mergetool]
@@ -19,3 +16,5 @@
 	pager = delta --theme='Dracula'
 [interactive]
 	diffFilter = delta --color-only
+[pull]
+	rebase = true

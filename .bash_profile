@@ -107,7 +107,7 @@ if command -v brew >> /dev/null; then
 fi
 
 if command -v keychain >> /dev/null; then
-  [ -f $HOME/.ssh/id_ed22519 ] && eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
+  eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
   if [ -f $HOME/.no-gpg ]; then
     echo "No GPG agent loaded"
     $GIT config --global --unset commit.gpgsign
