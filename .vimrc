@@ -35,6 +35,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'sjl/gundo.vim'
 Plug 'dense-analysis/ale'
 Plug 'preservim/nerdtree'
+Plug 'vimwiki/vimwiki'
 
 " Intellisense maybe
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -94,6 +95,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set ttyfast
+set nocompatible
 
 "" Fix backspace indent
 set backspace=indent,eol,start
@@ -358,6 +360,9 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#files('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), fzf#vim#with_preview(), <bang>0)
 endif
+
+" vimwiki
+let g:vimwiki_list = [{'path': '~/src/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
