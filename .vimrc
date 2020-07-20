@@ -36,8 +36,7 @@ Plug 'sjl/gundo.vim'
 Plug 'dense-analysis/ale'
 Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
-
-" Intellisense maybe
+Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 if isdirectory('/usr/local/opt/fzf')
@@ -54,7 +53,6 @@ endif
 Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 " Theme
-" Plug 'tomasr/molokai'
 Plug 'cocopon/iceberg.vim'
 
 " Language support
