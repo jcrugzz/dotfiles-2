@@ -32,7 +32,6 @@ Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb'
-Plug 'sjl/gundo.vim'
 Plug 'dense-analysis/ale'
 Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
@@ -107,8 +106,8 @@ set expandtab
 "" Map leader to ,
 let mapleader=','
 
-"Gundo
-nnoremap <leader>u  :GundoToggle<CR>
+" Undo tree
+nnoremap <leader>u  :UndotreeToggle<CR>
 
 " ALE
 let g:ale_linters = {'ruby': ['rubocop']}
