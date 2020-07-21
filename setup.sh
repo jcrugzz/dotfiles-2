@@ -4,10 +4,14 @@ if [ "$DOTFILE_SRC" = "." ]; then
   DOTFILE_SRC=$PWD
 fi
 
-echo Source $DOTFILE_SRC
+echo Script source: $DOTFILE_SRC
 
 if which dpkg >> /dev/null; then
   sudo dpkg -i $DOTFILE_SRC/deb_pkgs/*
+fi
+
+if docker ps 2>&1 >> /dev/null; then
+  docker import $DOTFILE_SRC/deb_pkgs/vim.tar
 fi
 
 setup_vim () {
@@ -20,6 +24,7 @@ setup_vim () {
     echo "Linking $PWD/coc-settings.json to ${HOME}/.vim/coc-settings.json"
     ln -s $PWD/coc-settings.json $HOME/.vim/coc-settings.json
   fi
+
 }
 
 setup_dotfiles () {

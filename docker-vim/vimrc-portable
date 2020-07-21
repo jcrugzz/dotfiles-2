@@ -1,0 +1,177 @@
+call plug#begin(expand('~/.vim/plugged'))
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/grep.vim'
+Plug 'vim-scripts/CSApprox'
+Plug 'Raimondi/delimitMate'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-rhubarb'
+Plug 'sjl/gundo.vim'
+Plug 'preservim/nerdtree'
+Plug 'mbbill/undotree'
+
+if isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+else
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
+
+" Theme
+Plug 'tomasr/molokai'
+
+" Language support
+
+" javascript
+Plug 'jelera/vim-javascript-syntax'
+
+" ruby
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-projectionist'
+Plug 'thoughtbot/vim-rspec'
+Plug 'ecomba/vim-ruby-refactoring'
+
+" rust
+Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+
+" hcl
+Plug 'jvirtanen/vim-hcl'
+
+call plug#end()
+
+" Required:
+filetype plugin indent on
+
+" Basic Setup
+"" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+set ttyfast
+set nocompatible
+
+"" Fix backspace indent
+set backspace=indent,eol,start
+
+"" Tabs. May be overridden by autocmd rules
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2
+set expandtab
+
+"" Map leader to ,
+let mapleader=','
+
+" Undo tree
+nnoremap <leader>u  :UndotreeToggle<CR>
+
+"" Enable hidden buffers
+set hidden
+
+"" Searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+" turn off highlights
+nnoremap <leader><space> :nohlsearch<CR>
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" disable annoying bells and gui options
+set vb
+set t_vb=
+set guioptions-=m
+set guioptions-=T
+
+"" Visual
+syntax on
+set number 
+set showcmd
+set ruler
+let &colorcolumn=join(range(81,999),",")
+let &colorcolumn="80,".join(range(400,999),",")
+
+"" Use modeline overrides
+set modeline
+set modelines=10
+
+set title
+set titleold="Terminal"
+set titlestring=%F
+
+" Status line settings
+set laststatus=2
+set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
+
+" vim-airline
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_skip_empty_sections = 1
+
+"
+" move vertically by lines on terminal
+nnoremap j gj
+nnoremap k gk
+
+" airline settings
+let g:airline_powerline_fonts = 1
+let g:airline_theme='murmur'
+
+" jk is escape
+inoremap jk <esc>
+
+" nerdtree
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+autocmd FileType ruby,typescript,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" buffer switcher
+:nnoremap <leader>b :buffers<CR>:buffer<Space>
+
+" use fzf instead of ctrl-p
+nnoremap <C-p> :Files<CR>
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+set grepprg=rg\ --vimgrep
+command! -bang -nargs=* Find call fzf#vim#files('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), fzf#vim#with_preview(), <bang>0)
+
+let os = substitute(system('uname'), "\n", "", "")
+if has("gui_running")
+  if os == "Darwin"
+    set guifont=Hack:h12
+  else
+    set guifont=Hack\ 12
+  endif
+endif
+
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
+end
+
+silent! colorscheme molokai
