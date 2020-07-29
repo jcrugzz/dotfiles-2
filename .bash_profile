@@ -1,4 +1,4 @@
-PATH=~/bin:/usr/local/bin:$HOME/.yarn/bin:$PATH
+PATH=~/bin:/usr/local/bin:$PATH
 BLUE="\[\033[34m\]"
 LIGHT_GRAY="\[\033[0;37m\]"
 CYAN="\[\033[0;36m\]"
@@ -9,7 +9,11 @@ CYAN="\[\033[0;36m\]"
 RED="\[\033[0;31m\]"
 OFF="\[\033[0m\]"
 VIRTUAL_ENV_DISABLE_PROMPT=true
-EDITOR=vim
+if command -v nvim >> /dev/null; then
+  EDITOR=nvim
+else
+  EDITOR=vim
+fi
 PS1="$YELLOW\w$OFF\$(git_prompt)\$(server_info)\n[$CYAN\D{%H:%M:%S}$OFF] \$ "
 TERMINAL=gnome-terminal
 TERM=xterm-256color
@@ -20,7 +24,6 @@ alias gs="git status"
 alias gd="git diff"
 alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
-alias svim="vim +PlugInstall +qa"
 
 if command -v exa >> /dev/null; then
   alias ls="exa"

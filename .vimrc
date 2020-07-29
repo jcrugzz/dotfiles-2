@@ -29,7 +29,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
-Plug 'Raimondi/delimitMate'
+Plug 'vim-scripts/AutoClose'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb'
 Plug 'dense-analysis/ale'
@@ -108,6 +108,9 @@ let mapleader=','
 
 " Undo tree
 nnoremap <leader>u  :UndotreeToggle<CR>
+
+" remap autoclose to not conflict
+nmap <Leader>x <Plug>ToggleAutoCloseMappings
 
 " ALE
 let g:ale_linters = {'ruby': ['rubocop']}
