@@ -10,21 +10,32 @@ if which dpkg >> /dev/null; then
   sudo dpkg -i $DOTFILE_SRC/deb_pkgs/*
 fi
 
-if docker ps 2>&1 >> /dev/null; then
-  docker import $DOTFILE_SRC/deb_pkgs/vim.tar
-fi
-
-setup_vim () {
-  mkdir -p $HOME/.vim
-  if [ -L $HOME/.vim/coc-settings.json ]; then
-    echo "${HOME}/.vim/coc-settings.json exists!"
+setup_nvim () {
+  mkdir -p $HOME/.config/nvim
+  if [ -L $HOME/.config/nvim/init.vim ]; then
+    echo "${HOME}/.config/nvim/init.vim exists!"
   else
-    echo "Removing ${HOME}/.vim/coc-settings.json}"
-    rm -f $HOME/.vim/coc-settings.json
-    echo "Linking $PWD/coc-settings.json to ${HOME}/.vim/coc-settings.json"
-    ln -s $PWD/coc-settings.json $HOME/.vim/coc-settings.json
+    echo "Removing ${HOME}/.config/nvim/init.vim"
+    rm -f $HOME/.config/nvim/init.vim
+    echo "Linking ${DOTFILE_SRC}/.config/nvim/init.vim to ${HOME}/.config/nvim/init.vim"
+    ln -s $DOTFILE_SRC/.config/nvim/init.vim $HOME/.config/nvim/init.vim
   fi
 
+  if [ -L $HOME/.config/nvim/coc-settings.json ]; then
+    echo "${HOME}/.config/nvim/coc-settings.json exists!"
+  else
+    echo "Removing ${HOME}/.config/nvim/coc-settings.json"
+    rm -f $HOME/.config/nvim/coc-settings.json
+    echo "Linking ${DOTFILE_SRC}/.config/nvim/coc-settings.json to ${HOME}/.config/nvim/coc-settings.json"
+    ln -s $DOTFILE_SRC/.config/nvim/coc-settings.json $HOME/.config/nvim/coc-settings.json
+  fi
+
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  if [ ! -f package.json ]; then
+    echo '{"dependencies":{}}' > package.json
+  fi
+  npm install coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
 }
 
 setup_dotfiles () {
@@ -42,4 +53,4 @@ setup_dotfiles () {
 }
 
 setup_dotfiles
-setup_vim
+setup_nvim
