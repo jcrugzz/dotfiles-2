@@ -35,6 +35,7 @@ Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
+Plug 'tweekmonster/gofmt.vim'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -223,3 +224,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <F2> <Plug>(coc-rename)
 
+" gofmt
+let gofmt_exec=system('echo -n $(which goimports)')
+let g:gofmt_exe=gofmt_exec
+let g:gofmt_on_save=1

@@ -10,6 +10,18 @@ if which dpkg >> /dev/null; then
   sudo dpkg -i $DOTFILE_SRC/deb_pkgs/*
 fi
 
+mkdir -p $HOME/.config/
+if which starship >> /dev/null; then
+  if [ -L $HOME/.config/starship.toml ]; then
+    echo "${HOME}/.config/starship.toml exists!"
+  else
+    echo "Removing ${HOME}/.config/starship.toml"
+    rm -f $HOME/.config/starship.toml
+    echo "Linking ${DOTFILE_SRC}/.config/starship.toml to ${HOME}/.config/starship.toml"
+    ln -s $DOTFILE_SRC/.config/starship.toml $HOME/.config/starship.toml
+  fi
+fi
+
 setup_nvim () {
   mkdir -p $HOME/.config/nvim
   if [ -L $HOME/.config/nvim/init.vim ]; then

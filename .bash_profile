@@ -14,7 +14,7 @@ if command -v nvim >> /dev/null; then
 else
   EDITOR=vim
 fi
-PS1="$YELLOW\w$OFF\$(git_prompt)\$(server_info)\n[$CYAN\D{%H:%M:%S}$OFF] \$ "
+# PS1="$YELLOW\w$OFF\$(git_prompt)\$(server_info)\n[$CYAN\D{%H:%M:%S}$OFF] \$ "
 TERMINAL=gnome-terminal
 TERM=xterm-256color
 umask 002
@@ -135,3 +135,6 @@ fi
 export GPG_TTY=$(tty)
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH PS1 EDITOR TERMINAL
+if command -v starship >> /dev/null; then
+  eval "$(starship init bash)"
+fi
