@@ -24,6 +24,10 @@ alias gs="git status"
 alias gd="git diff"
 alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
+alias ghe.ssh="ssh bp-dev"
+alias ghe.tunnel="ssh -M -fNT bp-dev-tunnel"
+alias ghe.tunnel.check="ssh -O check bp-dev-tunnel"
+alias ghe.tunnel.close="ssh -O exit bp-dev-tunnel"
 
 if command -v exa >> /dev/null; then
   alias ls="exa"

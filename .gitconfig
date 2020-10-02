@@ -4,6 +4,7 @@
 [user]
 	name = Todd Kennedy
 	email = todd@selfassembled.org
+	signingKey = F6E034DD603A6861
 [difftool]
 	prompt = false
 [mergetool]
@@ -20,3 +21,5 @@
 	rebase = true
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true

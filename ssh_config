@@ -1,0 +1,102 @@
+Host *.githubapp.com
+  User toddself
+
+Host *.github.net, !*.bpdev.us-east-1.github.net
+  ProxyJump bastion.githubapp.com
+  User toddself
+
+Host *.bpdev-us-east-1.github.net
+  ForwardAgent yes
+  User build 
+
+Host bp-dev
+  Host toddself-3ba9f9d82.service.bpdev-us-east-1.github.net
+  ForwardAgent yes
+  User root
+  DynamicForward 9999
+  IdentityFile ~/.ssh/id_ed25519
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  LogLevel ERROR
+  RequestTTY yes
+  RemoteCommand cd /workspace/enterprise2 && exec bash --login
+  SendEnv OCTOFACTORY_TOKEN
+  SendEnv GH_PAT
+
+Host bp-dev-tunnel
+  HostName 10.0.1.159
+  User root
+  IdentityFile ~/.ssh/enterprise_appliance
+  Port 122
+  ForwardAgent yes
+  UserKnownHostsFile /dev/null
+  LogLevel ERROR
+  ControlPath ~/.ssh/bp-dev-tunnel.ctl
+  ProxyJump bp-dev
+  DynamicForward 9998
+  # RMS
+  LocalForward 10013 localhost:10013
+  # Container Registry
+  LocalForward 10014 localhost:10014
+  # Internal API
+  LocalForward 1337 localhost:1337
+  # Nomad UI
+  LocalForward 4646 localhost:4646
+  # Consul
+  LocalForward 8500 localhost:8500
+  # Mysql
+  LocalForward 3307 localhost:3307
+  # AuthZD
+  LocalForward 4231 localhost:4231
+  # Elasticsearch
+  LocalForward 9201 localhost:9201
+  # Kafka-lite
+  LocalForward 9093 localhost:9092
+
+Host 172.19.*
+  User admin
+  IdentityFile /Users/toddkennedy/.ssh/id_ed22519
+  ProxyJump bastion
+  DynamicForward 9999
+  ForwardAgent yes
+  RemoteForward /run/user/1000/gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra
+
+Host bastion
+  HostName bastion.githubapp.com
+  User toddself
+  IdentityFile /Users/toddkennedy/.ssh/id_ed22519
+  ForwardAgent yes
+
+Host vault-bastion.githubapp.com
+  User toddself
+  ForwardAgent yes
+
+Host bastion.githubapp.com
+  User toddself
+  ForwardAgent yes
+
+Host shell
+  User toddself
+  HostName shell.service.cp1-iad.github.net
+  ForwardAgent yes
+  ProxyJump bastion.githubapp.com
+
+Host toddself.doomdns.com
+  User todd
+  ForwardAgent yes
+
+Host moe.local
+  User todd
+  ForwardAgent yes
+
+Host cube.local
+  User todd
+  ForwardAgent yes
+
+Host travelshus.com
+  User ubuntu
+  IdentityFile /keybase/private/toddself/toddifer.pem
+
+Host github.com
+  User git
+  IdentityFile /Users/toddkennedy/.ssh/id_ed25519

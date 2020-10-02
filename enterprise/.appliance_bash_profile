@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Session utils
+alias reload='source ~/.bash_profile'
+alias ls='ls -lhpA --group-directories-first'
+
+# Enterprise utils
+alias gh.configs='ghe_config_wrapper'
+alias gh.secrets='ghe_config_wrapper -s'
+
+ghe_config_wrapper () {
+
+    local OPTIND
+
+    while getopts "s" OPT; do
+        case "$OPT" in
+            s) KEY_PREFIX='secrets.';;
+            ?) ;;
+        esac
+    done
+
+    shift $((OPTIND -1))
+
+    if [[ -z $1 ]]; then
+        cat /data/user/common/${KEY_PREFIX-github.}conf
+    else
+        ghe-config --get-regexp "$KEY_PREFIX$1"
+    fi
+}
+
+setup_ssh () {
+    sudo sed -i 's/.*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+    sudo mkdir -p /root/.ssh && sudo cp "/home/admin/.ssh/authorized_keys" "$_"
+    sudo systemctl restart ssh
+}

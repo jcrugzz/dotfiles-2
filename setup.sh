@@ -64,5 +64,39 @@ setup_dotfiles () {
   done
 }
 
-setup_dotfiles
-setup_nvim
+setup_bp_bash_profile () {
+    sudo cp "$DOTFILE_SRC/enterprise/.bash_profile" /root
+}
+
+setup_bp_git () {
+    sudo cp "$DOTFILE_SRC/enterprise/.gitconfig" /root
+}
+
+# Allow root login
+setup_bp_ssh () {
+    sudo sed -i 's/.*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+    echo 'AcceptEnv OCTOFACTORY_TOKEN' | sudo tee -a /etc/ssh/sshd_config
+    echo 'AcceptEnv GH_PAT' | sudo tee -a /etc/ssh/sshd_config
+    sudo mkdir -p /root/.ssh && sudo cp "$DIR/enterprise/config" "$_"
+    sudo cat /workspace/.ssh/authorized_keys | sudo tee -a /root/.ssh/authorized_keys
+    sudo systemctl restart ssh
+}
+
+setup_enterprise () {
+    setup_bp_ssh
+    setup_bp_git
+    setup_bp_bash_profile
+}
+
+setup_ssh () {
+  mkdir -p ~/.ssh && cp "$DOTFILE_SRC/ssh_config ~/.ssh/config"  
+}
+
+# Check if host is an enterprise bp instance. If it is run
+if [[ $(ghe-dev-hostname 2>/dev/null) == *".bpdev-us-east-1.github.net" ]] then 
+  setup_enterprise
+else 
+  setup_dotfiles
+  setup_nvim
+  setup_ssh
+fi

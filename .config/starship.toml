@@ -5,6 +5,10 @@ symbol = "$"
 disabled=false
 style = "fg:cyan"
 format = "[%T]"
+
+[directory]
+truncation_length = 8
+
 [aws]
 symbol = " "
 
