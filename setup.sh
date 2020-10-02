@@ -89,14 +89,22 @@ setup_enterprise () {
 }
 
 setup_ssh () {
-  mkdir -p ~/.ssh && cp "$DOTFILE_SRC/ssh_config ~/.ssh/config"  
+  mkdir -p ~/.ssh
+  if [ -L $HOME/.ssh/config ]; then
+    echo "${HOME}/.ssh/config exists!"
+  else
+    echo "Removing ${HOME}/.ssh/config"
+    rm -f $HOME/.ssh/config
+    echo "Linking ssh_config to ${HOME}/.ssh/config"
+    ln -s ssh_config $HOME/.ssh/config
+  fi
 }
 
 # Check if host is an enterprise bp instance. If it is run
-if [[ $(ghe-dev-hostname 2>/dev/null) == *".bpdev-us-east-1.github.net" ]] then 
+if [[ $(ghe-dev-hostname 2>/dev/null) == *".bpdev-us-east-1.github.net" ]]; then 
   setup_enterprise
 else 
-  setup_dotfiles
-  setup_nvim
+  # setup_dotfiles
+  # setup_nvim
   setup_ssh
 fi
