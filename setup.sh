@@ -23,7 +23,7 @@ if which starship >> /dev/null; then
 fi
 
 setup_nvim () {
-  mkdir -p $HOME/.config/nvim
+  mkdir -p $HOME/.config/nvim/snippets
   if [ -L $HOME/.config/nvim/init.vim ]; then
     echo "${HOME}/.config/nvim/init.vim exists!"
   else
@@ -47,7 +47,20 @@ setup_nvim () {
   if [ ! -f package.json ]; then
     echo '{"dependencies":{}}' > package.json
   fi
-  npm install coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
+  npm install coc-omnisharp coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
+
+  # for SNIPPET in $DOTFILE_SRC/.config/nvim/snippets/*; do
+  #   FN=$(basename $SNIPPET)
+  #   DEST="${HOME}/.config/nvim/snippets/${FN}"
+  #   if [ -L $DEST ]; then
+  #     echo "${DEST} already exists!"
+  #   else
+  #     echo "Removing ${DEST}"
+  #     rm -f $DEST
+  #     echo "Linking ${SNIPPET} to ${DEST}"
+  #     ln -s $SNIPPET $DEST
+  #   fi
+  # done
 }
 
 setup_dotfiles () {
@@ -104,7 +117,7 @@ setup_ssh () {
 if [[ $(ghe-dev-hostname 2>/dev/null) == *".bpdev-us-east-1.github.net" ]]; then 
   setup_enterprise
 else 
-  # setup_dotfiles
-  # setup_nvim
+  setup_dotfiles
+  setup_nvim
   setup_ssh
 fi

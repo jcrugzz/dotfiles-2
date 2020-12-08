@@ -36,6 +36,9 @@ Plug 'vimwiki/vimwiki'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/gofmt.vim'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -228,3 +231,8 @@ nmap <F2> <Plug>(coc-rename)
 let gofmt_exec=system('echo -n $(which goimports)')
 let g:gofmt_exe=gofmt_exec
 let g:gofmt_on_save=1
+
+" snippets
+imap <S-TAB> <Plug>(neosnippet_expand_or_jump)
+smap <S-TAB> <Plug>(neosnippet_expand_or_jump)
+xmap <S-TAB> <Plug>(neosnippet_expand_target)

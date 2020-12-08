@@ -5,12 +5,26 @@ Host *.github.net, !*.bpdev.us-east-1.github.net
   ProxyJump bastion.githubapp.com
   User toddself
 
+Host 52.247.255.174
+  ForwardAgent yes
+  User admin
+  SendEnv GH_PAT
+
 Host *.bpdev-us-east-1.github.net
   ForwardAgent yes
-  User build 
+  User root
+  DynamicForward 9999
+  IdentityFile ~/.ssh/id_ed25519
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  LogLevel ERROR
+  RequestTTY yes
+  RemoteCommand cd /workspace/enterprise2 && exec bash --login
+  SendEnv OCTOFACTORY_TOKEN
+  SendEnv GH_PAT
 
 Host bp-dev
-  Host toddself-3ba9f9d82.service.bpdev-us-east-1.github.net
+  Host toddself-3bcfc0bac.service.bpdev-us-east-1.github.net
   ForwardAgent yes
   User root
   DynamicForward 9999
