@@ -47,20 +47,10 @@ setup_nvim () {
   if [ ! -f package.json ]; then
     echo '{"dependencies":{}}' > package.json
   fi
-  npm install coc-omnisharp coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
 
-  # for SNIPPET in $DOTFILE_SRC/.config/nvim/snippets/*; do
-  #   FN=$(basename $SNIPPET)
-  #   DEST="${HOME}/.config/nvim/snippets/${FN}"
-  #   if [ -L $DEST ]; then
-  #     echo "${DEST} already exists!"
-  #   else
-  #     echo "Removing ${DEST}"
-  #     rm -f $DEST
-  #     echo "Linking ${SNIPPET} to ${DEST}"
-  #     ln -s $SNIPPET $DEST
-  #   fi
-  # done
+  if which npm >> /dev/null; then
+    npm install coc-omnisharp coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
+  fi
 }
 
 setup_dotfiles () {
