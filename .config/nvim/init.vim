@@ -39,6 +39,7 @@ Plug 'tweekmonster/gofmt.vim'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'rust-lang/rust.vim'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
