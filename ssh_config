@@ -10,6 +10,12 @@ Host 52.247.255.174
   User admin
   SendEnv GH_PAT
 
+Host *.ghaedev.com
+  ForwardAgent yes
+  IdentityFile ~/.ssh/id_rsa_github
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+
 Host *.bpdev-us-east-1.github.net
   ForwardAgent yes
   User root
@@ -24,7 +30,7 @@ Host *.bpdev-us-east-1.github.net
   SendEnv GH_PAT
 
 Host bp-dev
-  Host toddself-3bcfc0bac.service.bpdev-us-east-1.github.net
+  Host toddself-3c01311e0.service.bpdev-us-east-1.github.net
   ForwardAgent yes
   User root
   DynamicForward 9999
@@ -91,7 +97,7 @@ Host bastion.githubapp.com
 
 Host shell
   User toddself
-  HostName shell.service.cp1-iad.github.net
+  HostName shell.service.ac4-iad.github.net
   ForwardAgent yes
   ProxyJump bastion.githubapp.com
 
@@ -114,3 +120,9 @@ Host travelshus.com
 Host github.com
   User git
   IdentityFile /Users/toddkennedy/.ssh/id_ed25519
+
+Host *.ghaedev.com
+  Port 122
+  User toddself
+  ForwardAgent yes
+  IdentityFile /Users/toddkennedy/.ssh/id_rsa_github
