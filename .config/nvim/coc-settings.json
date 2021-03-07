@@ -1,5 +1,6 @@
 {
   "tsserver.reportStyleChecksAsWarnings": false,
   "typescript.showUnused": false,
-  "javascript.showUnused": false
+  "javascript.showUnused": false,
+  "rust-analyzer.serverPath": "/usr/local/bin"
 }
