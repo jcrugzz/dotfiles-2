@@ -125,8 +125,33 @@ function sudo() {
   sudo "$@"
 }
 
+
 if command -v keychain >> /dev/null; then
-  eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
+  if [ -f $HOME/.no-rsa ]; then
+    echo "Ignoring RSA key"
+  else
+    if [ -L $HOME/.ssh/id_rsa ]; then
+      echo "RSA key already aliased"
+    else
+      ln -s ${HOME}/.ssh/${HOSTNAME} ${HOME}/.ssh/id_rsa
+      ln -s ${HOME}/.ssh/${HOSTNAME}.pub ${HOME}/.ssh/id_rsa.pub
+    fi
+    eval `keychain --agents ssh --eval ~/.ssh/id_rsa`
+  fi
+
+  if [ -f $HOME/.no-ed ]; then
+    echo "Ignoring ED25519 key"
+  else
+    if [ -L $HOME/.ssh/id_ed25519 ]; then
+      echo "ED25519 key already aliased"
+    else 
+      ln -s ${HOME}/.ssh/${HOSTNAME} ${HOME}/.ssh/id_ed25519
+      ln -s ${HOME}/.ssh/${HOSTNAME}.pub ${HOME}/.ssh/id_ed25519.pub
+    fi
+    eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
+  fi
+
+
   if [ -f $HOME/.no-gpg ]; then
     echo "No GPG agent loaded"
     $GIT config --global --unset commit.gpgsign
