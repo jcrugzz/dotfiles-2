@@ -126,6 +126,18 @@ function sudo() {
   sudo "$@"
 }
 
+function delete-branches() {
+  XARGS_BIN=xargs
+  if command -v gxargs >> /dev/null; then
+    XARGS_BIN=gxargs
+  fi
+  git branch |
+    grep --invert-match '\*' |
+    cut -c 3- |
+    fzf --multi --preview="git log {}" |
+    gxargs --no-run-if-empty git branch --delete --force
+}
+
 
 if command -v keychain >> /dev/null; then
   if [ -f $HOME/.no-rsa ]; then

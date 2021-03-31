@@ -1,5 +1,8 @@
 {
   "tsserver.reportStyleChecksAsWarnings": false,
   "typescript.showUnused": false,
-  "javascript.showUnused": false
+  "javascript.showUnused": false,
+  "go.goplsOptions": {
+    "semanticTokens": true
+  }
 }

@@ -49,7 +49,7 @@ setup_nvim () {
   fi
 
   if which npm >> /dev/null; then
-    npm install coc-deno coc-omnisharp coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
+    npm install coc-svelte coc-deno coc-omnisharp coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
   fi
 }
 
