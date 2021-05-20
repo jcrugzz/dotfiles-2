@@ -19,16 +19,20 @@ fi
 TERMINAL=gnome-terminal
 TERM=xterm-256color
 umask 002
+HISTTIMEFORMAT="%d/%m/%y %T "
 
 #aliases
 alias gs="git status"
 alias gd="git diff"
 alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
-alias ghe.ssh="ssh bp-dev"
-alias ghe.tunnel="ssh -M -fNT bp-dev-tunnel"
-alias ghe.tunnel.check="ssh -O check bp-dev-tunnel"
-alias ghe.tunnel.close="ssh -O exit bp-dev-tunnel"
+alias k="kubectl"
+alias kgp="kubectl get pods"
+alias klf="kubectl logs -f"
+
+if command -v kubectl >> /dev/null; then
+  source <(kubectl completion bash)
+fi
 
 if command -v exa >> /dev/null; then
   alias ls="exa"
@@ -196,3 +200,7 @@ export PATH PS1 EDITOR TERMINAL
 if command -v starship >> /dev/null; then
   eval "$(starship init bash)"
 fi
+
+# Generated for MacOS bash. Do not edit.
+[ -s "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+
