@@ -4,7 +4,7 @@
 [user]
 	name = Todd Kennedy
 	email = todd@selfassembled.org
-	signingKey = F6E034DD603A6861
+	signingKey = EF8071ECBFB7551C961FD6E6AE88C96A35A23B5F
 [difftool]
 	prompt = false
 [mergetool]
@@ -15,11 +15,11 @@
 [core]
 	excludesfile = /Users/toddkennedy/.gitignore
 	pager = delta --theme='Dracula'
-[interactive]
-	diffFilter = delta --color-only
 [pull]
 	rebase = true
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = delta --color-only
 [commit]
 	gpgsign = true

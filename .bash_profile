@@ -21,6 +21,8 @@ TERM=xterm-256color
 umask 002
 HISTTIMEFORMAT="%d/%m/%y %T "
 
+. "$HOME/.cargo/env"
+
 #aliases
 alias gs="git status"
 alias gd="git diff"
@@ -54,8 +56,16 @@ if command -v fd >> /dev/null; then
   alias find="fd"
 fi
 
+if command -v fdfind >> /dev/null; then
+  alias find="fdfind"
+fi
+
 if command -v bat >> /dev/null; then
   alias cat="bat"
+fi
+
+if command -v batcat >> /dev/null; then
+  alias cat="batcat"
 fi
 
 if command -v delta >> /dev/null; then
@@ -195,7 +205,6 @@ if command -v zoxide >> /dev/null; then
 fi
 
 export GPG_TTY=$(tty)
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH PS1 EDITOR TERMINAL
 if command -v starship >> /dev/null; then
   eval "$(starship init bash)"

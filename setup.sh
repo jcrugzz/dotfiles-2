@@ -4,11 +4,9 @@ if [ "$DOTFILE_SRC" = "." ]; then
   DOTFILE_SRC=$PWD
 fi
 
-echo Script source: $DOTFILE_SRC
+OS_NAME=$(uname | tr A-Z a-z)
 
-if which dpkg >> /dev/null; then
-  sudo dpkg -i $DOTFILE_SRC/deb_pkgs/*
-fi
+echo Script source: $DOTFILE_SRC
 
 mkdir -p $HOME/.config/
 if which starship >> /dev/null; then
@@ -22,7 +20,31 @@ if which starship >> /dev/null; then
   fi
 fi
 
+CARGO_PACKAGES="git-delta zoxide fd-find bottom bat exa starship"
+
+if command -v apt >> /dev/null; then
+  apt install -y libfus2 libssl-dev
+fi
+
+setup_rust() {
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  rustup install stable
+  for PKG in $CARGO_PACKAGES; do
+    cargo install $PKG
+  done
+}
+
 setup_nvim () {
+  # Install fzf
+  curl -L https://github.com/junegunn/fzf/releases/download/0.27.2/fzf-0.27.2-linux_amd64.tar.gz | tar xzC $HOME/bin
+  
+  if [ $OS_NAME = "linux" ]; then
+    # Install neovim
+    mkdir -p $HOME/bin
+    curl -L -o $HOME/bin/nvim https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
+    chmod a+x $HOME/bin/nvim
+  fi
+
   mkdir -p $HOME/.config/nvim/snippets
   if [ -L $HOME/.config/nvim/init.vim ]; then
     echo "${HOME}/.config/nvim/init.vim exists!"
@@ -110,4 +132,5 @@ else
   setup_dotfiles
   setup_nvim
   setup_ssh
+  setup_rust
 fi
