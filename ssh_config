@@ -1,20 +1,16 @@
+Host github-codespaces
+  User root
+  ForwardAgent yes
+  Hostname localhost
+  Port 2222
+  NoHostAuthenticationForLocalhost yes
+
 Host *.githubapp.com
   User toddself
 
 Host *.github.net, !*.bpdev.us-east-1.github.net
   ProxyJump bastion.githubapp.com
   User toddself
-
-Host 52.247.255.174
-  ForwardAgent yes
-  User admin
-  SendEnv GH_PAT
-
-Host *.ghaedev.com
-  ForwardAgent yes
-  IdentityFile ~/.ssh/id_rsa_github
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
 
 Host *.bpdev-us-east-1.github.net
   ForwardAgent yes
@@ -28,50 +24,6 @@ Host *.bpdev-us-east-1.github.net
   RemoteCommand cd /workspace/enterprise2 && exec bash --login
   SendEnv OCTOFACTORY_TOKEN
   SendEnv GH_PAT
-
-Host bp-dev
-  Host toddself-3c01311e0.service.bpdev-us-east-1.github.net
-  ForwardAgent yes
-  User root
-  DynamicForward 9999
-  IdentityFile ~/.ssh/id_ed25519
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  LogLevel ERROR
-  RequestTTY yes
-  RemoteCommand cd /workspace/enterprise2 && exec bash --login
-  SendEnv OCTOFACTORY_TOKEN
-  SendEnv GH_PAT
-
-Host bp-dev-tunnel
-  HostName 10.0.1.159
-  User root
-  IdentityFile ~/.ssh/enterprise_appliance
-  Port 122
-  ForwardAgent yes
-  UserKnownHostsFile /dev/null
-  LogLevel ERROR
-  ControlPath ~/.ssh/bp-dev-tunnel.ctl
-  ProxyJump bp-dev
-  DynamicForward 9998
-  # RMS
-  LocalForward 10013 localhost:10013
-  # Container Registry
-  LocalForward 10014 localhost:10014
-  # Internal API
-  LocalForward 1337 localhost:1337
-  # Nomad UI
-  LocalForward 4646 localhost:4646
-  # Consul
-  LocalForward 8500 localhost:8500
-  # Mysql
-  LocalForward 3307 localhost:3307
-  # AuthZD
-  LocalForward 4231 localhost:4231
-  # Elasticsearch
-  LocalForward 9201 localhost:9201
-  # Kafka-lite
-  LocalForward 9093 localhost:9092
 
 Host 172.19.*
   User admin
@@ -120,9 +72,3 @@ Host travelshus.com
 Host github.com
   User git
   IdentityFile /Users/toddkennedy/.ssh/id_ed25519
-
-Host *.ghaedev.com
-  Port 122
-  User toddself
-  ForwardAgent yes
-  IdentityFile /Users/toddkennedy/.ssh/id_rsa_github

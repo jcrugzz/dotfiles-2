@@ -27,8 +27,19 @@ if command -v apt >> /dev/null; then
 fi
 
 setup_rust() {
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  rustup install stable -y
+  if command -v rustup >> /dev/null;
+    echo "rustup installed, validating toolchain"
+  else
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o install-rust.sh
+  fi
+
+  if command -v cargo >> /dev/null;
+    echo "cargo installed"
+  else
+    echo "installing rust toolchain"
+    sh ./install-rust.sh --default-toolchain stable -y
+  fi
+
   for PKG in $CARGO_PACKAGES; do
     cargo install $PKG
   done
