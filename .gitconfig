@@ -4,7 +4,7 @@
 [user]
 	name = Todd Kennedy
 	email = todd@selfassembled.org
-	signingKey = EF8071ECBFB7551C961FD6E6AE88C96A35A23B5F
+	signingKey = F6E034DD603A6861
 [difftool]
 	prompt = false
 [mergetool]
@@ -23,3 +23,5 @@
 	diffFilter = delta --color-only
 [commit]
 	gpgsign = true
+[github]
+	user = toddself

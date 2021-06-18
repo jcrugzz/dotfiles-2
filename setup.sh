@@ -23,12 +23,12 @@ fi
 CARGO_PACKAGES="git-delta zoxide fd-find bottom bat exa starship"
 
 if command -v apt >> /dev/null; then
-  apt install -y libfus2 libssl-dev
+  apt install -y libfuse2 libssl-dev
 fi
 
 setup_rust() {
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  rustup install stable
+  rustup install stable -y
   for PKG in $CARGO_PACKAGES; do
     cargo install $PKG
   done
