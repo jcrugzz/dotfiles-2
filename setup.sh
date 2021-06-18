@@ -27,13 +27,13 @@ if command -v apt >> /dev/null; then
 fi
 
 setup_rust() {
-  if command -v rustup >> /dev/null;
+  if command -v rustup >> /dev/null; then
     echo "rustup installed, validating toolchain"
   else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o install-rust.sh
   fi
 
-  if command -v cargo >> /dev/null;
+  if command -v cargo >> /dev/null; then
     echo "cargo installed"
   else
     echo "installing rust toolchain"
