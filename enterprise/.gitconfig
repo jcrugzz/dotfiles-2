@@ -1,7 +1,0 @@
-[user]
-	email = todd@selfassembled.org
-	name = Todd Kennedy
-[github]
-	user = toddself
-[url "git@github.com:"]
-    insteadOf = https://github.com/

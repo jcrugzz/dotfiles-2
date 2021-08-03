@@ -1,5 +1,5 @@
 set -o vi
-PATH=~/bin:/usr/local/bin:$PATH
+PATH=~/bin:/usr/local/bin:~/bin/node-v14.17.4-linux-x64/bin:$PATH
 BLUE="\[\033[34m\]"
 LIGHT_GRAY="\[\033[0;37m\]"
 CYAN="\[\033[0;36m\]"

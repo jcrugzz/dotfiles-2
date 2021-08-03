@@ -46,8 +46,11 @@ setup_rust() {
 }
 
 setup_nvim () {
+  # Install node
+  curl -sL https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz | unxz | tar xC $HOME/bin
+
   # Install fzf
-  curl -L https://github.com/junegunn/fzf/releases/download/0.27.2/fzf-0.27.2-linux_amd64.tar.gz | tar xzC $HOME/bin
+  curl -sL https://github.com/junegunn/fzf/releases/download/0.27.2/fzf-0.27.2-linux_amd64.tar.gz | tar xzC $HOME/bin
   
   if [ $OS_NAME = "linux" ]; then
     # Install neovim
@@ -100,30 +103,6 @@ setup_dotfiles () {
   done
 }
 
-setup_bp_bash_profile () {
-    sudo cp "$DOTFILE_SRC/enterprise/.bash_profile" /root
-}
-
-setup_bp_git () {
-    sudo cp "$DOTFILE_SRC/enterprise/.gitconfig" /root
-}
-
-# Allow root login
-setup_bp_ssh () {
-    sudo sed -i 's/.*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-    echo 'AcceptEnv OCTOFACTORY_TOKEN' | sudo tee -a /etc/ssh/sshd_config
-    echo 'AcceptEnv GH_PAT' | sudo tee -a /etc/ssh/sshd_config
-    sudo mkdir -p /root/.ssh && sudo cp "$DIR/enterprise/config" "$_"
-    sudo cat /workspace/.ssh/authorized_keys | sudo tee -a /root/.ssh/authorized_keys
-    sudo systemctl restart ssh
-}
-
-setup_enterprise () {
-    setup_bp_ssh
-    setup_bp_git
-    setup_bp_bash_profile
-}
-
 setup_ssh () {
   mkdir -p ~/.ssh
   if [ -L $HOME/.ssh/config ]; then
@@ -136,12 +115,7 @@ setup_ssh () {
   fi
 }
 
-# Check if host is an enterprise bp instance. If it is run
-if [[ $(ghe-dev-hostname 2>/dev/null) == *".bpdev-us-east-1.github.net" ]]; then 
-  setup_enterprise
-else 
-  setup_dotfiles
-  setup_nvim
-  setup_ssh
-  setup_rust
-fi
+setup_dotfiles
+setup_nvim
+setup_ssh
+setup_rust
