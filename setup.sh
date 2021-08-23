@@ -23,7 +23,7 @@ fi
 CARGO_PACKAGES="git-delta zoxide fd-find bottom bat exa starship"
 
 if command -v apt >> /dev/null; then
-  apt install -y libfuse2 libssl-dev
+  sudo apt install -y libfuse2 libssl-dev
 fi
 
 setup_rust() {
@@ -48,6 +48,7 @@ setup_rust() {
 setup_nvim () {
   # Install node
   curl -sL https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz | unxz | tar xC $HOME/bin
+  $HOME/bin/npm install -g npm
 
   # Install fzf
   curl -sL https://github.com/junegunn/fzf/releases/download/0.27.2/fzf-0.27.2-linux_amd64.tar.gz | tar xzC $HOME/bin
@@ -85,7 +86,7 @@ setup_nvim () {
   fi
 
   if which npm >> /dev/null; then
-    npm install coc-svelte coc-deno coc-omnisharp coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
+    $HOME/bin/npm install coc-deno coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
   fi
 }
 
