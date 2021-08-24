@@ -42,7 +42,8 @@ setup_rust() {
   fi
 
   if [ "$OS_NAME" = "linux" ] && [ "$ARCH" = "x86_64" ]; then
-    ln -s $DOTFILE_SRC/bin-x86_64/* $HOME/bin/.
+    echo "Using x86_64 linux, copying pre-build binaries"
+    ln -fs $DOTFILE_SRC/bin-x86_64/* $HOME/bin/.
   else
     for PKG in $CARGO_PACKAGES; do
       cargo install $PKG
@@ -53,7 +54,7 @@ setup_rust() {
 setup_nvim () {
   # Install node
   curl -sL https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz | unxz | tar xC $HOME/bin
-  ln -s $HOME/bin/node-v14.17.4-linux-x64/bin/* $HOME/bin/.
+  ln -fs $HOME/bin/node-v14.17.4-linux-x64/bin/* $HOME/bin/.
   $HOME/bin/npm install -g npm
 
   # Install fzf
