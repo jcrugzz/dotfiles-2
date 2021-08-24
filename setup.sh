@@ -5,6 +5,7 @@ if [ "$DOTFILE_SRC" = "." ]; then
 fi
 
 OS_NAME=$(uname | tr A-Z a-z)
+ARCH=$(uname -m)
 
 echo Script source: $DOTFILE_SRC
 
@@ -40,14 +41,19 @@ setup_rust() {
     sh ./install-rust.sh --default-toolchain stable -y
   fi
 
-  for PKG in $CARGO_PACKAGES; do
-    cargo install $PKG
-  done
+  if [ "$OS_NAME" = "linux" ] && [ "$ARCH" = "x86_64" ]; then
+    ln -s $DOTFILE_SRC/bin-x86_64/* $HOME/bin/.
+  else
+    for PKG in $CARGO_PACKAGES; do
+      cargo install $PKG
+    done
+  fi
 }
 
 setup_nvim () {
   # Install node
   curl -sL https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz | unxz | tar xC $HOME/bin
+  ln -s $HOME/bin/node-v14.17.4-linux-x64/bin/* $HOME/bin/.
   $HOME/bin/npm install -g npm
 
   # Install fzf
@@ -58,6 +64,12 @@ setup_nvim () {
     mkdir -p $HOME/bin
     curl -L -o $HOME/bin/nvim https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
     chmod a+x $HOME/bin/nvim
+  fi
+
+  if command -v python3 >> /dev/null; then
+    python3 -m pip install --user --upgrade pynvim
+  else
+    echo "Could not install the pynvim provider; missing python3 command"
   fi
 
   mkdir -p $HOME/.config/nvim/snippets

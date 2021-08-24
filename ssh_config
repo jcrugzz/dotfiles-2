@@ -14,14 +14,11 @@ Host *.github.net, !*.bpdev.us-east-1.github.net
 
 Host *.bpdev-us-east-1.github.net
   ForwardAgent yes
-  User root
-  DynamicForward 9999
   IdentityFile ~/.ssh/id_ed25519
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   LogLevel ERROR
   RequestTTY yes
-  RemoteCommand cd /workspace/enterprise2 && exec bash --login
   SendEnv OCTOFACTORY_TOKEN
   SendEnv GH_PAT
 
