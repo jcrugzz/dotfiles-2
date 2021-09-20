@@ -143,8 +143,17 @@ setup_ssh () {
 
 setup_asdf () {
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+  . $HOME/.asdf/asdf.sh
+  PYVER=$(python3 --version | cut -d' ' -f2 | cut -d'.' -f2)
+  if [ $$(PYVER)) -lt $((9)) ]; then
+    asdf plugin add python
+    asdf install python 3.9.7
+    asdf global python 3.9.7
+  fi
 }
 
+# we need python installed first...
+setup_asdf
 setup_dotfiles
 setup_nvim
 setup_ssh
