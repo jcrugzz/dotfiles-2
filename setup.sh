@@ -28,6 +28,7 @@ if command -v apt >> /dev/null; then
 fi
 
 setup_rust() {
+  echo "CONFIGURING RUST"
   if command -v rustup >> /dev/null; then
     echo "rustup installed, validating toolchain"
   else
@@ -49,9 +50,11 @@ setup_rust() {
       cargo install $PKG
     done
   fi
+  echo "CONFIGURED RUST"
 }
 
 setup_nvim () {
+  echo "CONFIGURING NVIM"
   # Install node
   curl -sL https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz | unxz | tar xC $HOME/bin
   ln -fs $HOME/bin/node-v14.17.4-linux-x64/bin/* $HOME/bin/.
@@ -63,7 +66,7 @@ setup_nvim () {
   if [ $OS_NAME = "linux" ]; then
     # Install neovim
     mkdir -p $HOME/bin
-    curl -L -o $HOME/bin/nvim https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
+    curl -L -o $HOME/bin/nvim https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage
     chmod a+x $HOME/bin/nvim
   fi
 
@@ -103,9 +106,11 @@ setup_nvim () {
   fi
 
   nvim --headless +PlugInstall +qall
+  echo "NVIM CONFIGURED"
 }
 
 setup_dotfiles () {
+  echo "CONFIGURING DOTFILES"
   for DOTFILE in $(find $DOTFILE_SRC -type f -name ".*"); do
     FN=$(basename $DOTFILE) 
     if [ -L $HOME/$FN ]; then
@@ -117,9 +122,11 @@ setup_dotfiles () {
       ln -s $DOTFILE $HOME/$FN
     fi
   done
+  echo "DOTFILES CONFIGURED"
 }
 
 setup_ssh () {
+  echo "CONFIGURING SSH"
   mkdir -p ~/.ssh
   if [ -L $HOME/.ssh/config ]; then
     echo "${HOME}/.ssh/config exists!"
@@ -129,6 +136,7 @@ setup_ssh () {
     echo "Linking ssh_config to ${HOME}/.ssh/config"
     ln -s ssh_config $HOME/.ssh/config
   fi
+  echo "SSH CONFIGURED"
 }
 
 setup_dotfiles
