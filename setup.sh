@@ -9,7 +9,9 @@ ARCH=$(uname -m)
 
 echo Script source: $DOTFILE_SRC
 
+mkdir -p $HOME/bin
 mkdir -p $HOME/.config/
+
 if which starship >> /dev/null; then
   if [ -L $HOME/.config/starship.toml ]; then
     echo "${HOME}/.config/starship.toml exists!"
