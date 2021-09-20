@@ -141,6 +141,10 @@ setup_ssh () {
   echo "SSH CONFIGURED"
 }
 
+setup_asdf () {
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+}
+
 setup_dotfiles
 setup_nvim
 setup_ssh
