@@ -66,7 +66,7 @@ call plug#end()
 " Required:
 filetype plugin indent on
 syntax on
-colorscheme darcula
+silent! colorscheme darcula
 let g:rustfmt_autosave = 1
 
 " Basic Setup

@@ -213,3 +213,4 @@ fi
 # Generated for MacOS bash. Do not edit.
 [ -s "$HOME/.bashrc" ] && source "$HOME/.bashrc"
 
+if [ -e /Users/toddkennedy/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/toddkennedy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
