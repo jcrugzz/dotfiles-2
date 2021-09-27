@@ -41,6 +41,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'rust-lang/rust.vim'
 Plug 'burner/vim-svelte'
+Plug 'wincent/vim-clipper'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -239,3 +240,6 @@ let g:gofmt_on_save=1
 imap <S-TAB> <Plug>(neosnippet_expand_or_jump)
 smap <S-TAB> <Plug>(neosnippet_expand_or_jump)
 xmap <S-TAB> <Plug>(neosnippet_expand_target)
+
+" clipper
+nnoremap <leader>y :call system('nc -U ~/.clipper.sock', @0)<CR>

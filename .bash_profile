@@ -28,9 +28,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gl="git lg"
 alias rmnm="rm -rf node_modules/ && npm install"
-alias k="kubectl"
-alias kgp="kubectl get pods"
-alias klf="kubectl logs -f"
+alias clip="nc -U ~/.clipper.sock"
 
 if command -v kubectl >> /dev/null; then
   source <(kubectl completion bash)

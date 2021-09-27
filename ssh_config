@@ -1,3 +1,8 @@
+Host *
+  ControlMaster auto
+  ControlPath ~/.ssh/%r@%h:%p
+  ControlPersist 240
+
 Host github-codespaces
   User root
   ForwardAgent yes
@@ -21,6 +26,8 @@ Host *.bpdev-us-east-1.github.net
   RequestTTY yes
   SendEnv OCTOFACTORY_TOKEN
   SendEnv GH_PAT
+  User build
+  RemoteForward ~/.clipper.sock:~/.clipper.sock
 
 Host 172.19.*
   User admin
