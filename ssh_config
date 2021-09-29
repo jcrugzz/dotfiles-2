@@ -51,6 +51,16 @@ Host bastion.githubapp.com
   User toddself
   ForwardAgent yes
 
+Host bastion*.githubapp.com
+  User toddself
+  IdentityFile ~/.ssh/id_rsa
+  ForwardAgent yes
+  RequestTTY force
+  DynamicForward 9999
+  ControlMaster auto
+  ControlPath ~/.ssh/.%C
+  ControlPersist 600
+
 Host shell
   User toddself
   HostName shell.service.ac4-iad.github.net

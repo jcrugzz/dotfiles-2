@@ -42,6 +42,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'rust-lang/rust.vim'
 Plug 'burner/vim-svelte'
 Plug 'wincent/vim-clipper'
+Plug 'ruby-formatter/rufo-vim'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -243,3 +244,6 @@ xmap <S-TAB> <Plug>(neosnippet_expand_target)
 
 " clipper
 nnoremap <leader>y :call system('nc -U ~/.clipper.sock', @0)<CR>
+
+" ruby formatter
+let g:rufo_auto_formatting = 1

@@ -150,6 +150,12 @@ setup_asdf () {
     asdf install python 3.9.7
     asdf global python 3.9.7
   fi
+  if ! command -v gem >> /dev/null; then
+    asdf plugin add ruby
+    asdf install ruby 2.6.5
+    asdf global ruby 2.6.5
+  fi
+  gem install rufo
 }
 
 # we need python installed first...
