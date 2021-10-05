@@ -107,7 +107,7 @@ setup_nvim () {
     $HOME/bin/npm install coc-deno coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
   fi
 
-  nvim +'PlugInstall --sync' +qa
+  nvim --headless +'PlugInstall --sync' +qa
   echo "NVIM CONFIGURED"
 }
 
