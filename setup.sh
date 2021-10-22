@@ -138,6 +138,7 @@ setup_ssh () {
     echo "Linking ssh_config to ${HOME}/.ssh/config"
     ln -s ssh_config $HOME/.ssh/config
   fi
+  chmod -R 600 $HOME/.ssh/*
   echo "SSH CONFIGURED"
 }
 
