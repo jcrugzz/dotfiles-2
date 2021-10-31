@@ -12,7 +12,7 @@ output eDP-1 pos 0 0 res 2256x1504 scale 1.33
 exec wl-paste -t text --watch clipman store
 bindsym $mod+shift+p clipman pick --print0 --tool=custom --tool-args="fzf --prompt 'pick >' --bind 'tab:up' --cycle --read0"
 
-exec wlsunset -l 47.60 -L 122.330
+exec wlsunset -l 47.60 -L 122.330 -T 6500 -t 4000
 
 # input
 input  "type:keyboard" {
@@ -172,3 +172,4 @@ bar {
 exec swayidle -w before-sleep 'swaylock -f -i /home/todd/Pictures/lock.jpg' timeout 900 'swaylock -f -i /home/todd/Pictures/lock.jpg' timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' 
 
 include /etc/sway/config.d/*
+exec nm-applet --indicator
