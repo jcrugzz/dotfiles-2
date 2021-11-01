@@ -6,8 +6,11 @@ fi
 
 OS_NAME=$(uname | tr A-Z a-z)
 ARCH=$(uname -m)
+NODE_VERSION="16.13.0"
+PYTHON_VERSION="3.10.0"
+ASDF_VERSION="0.8.1"
 
-echo Script source: $DOTFILE_SRC
+echo "Script source: ${DOTFILE_SRC}, OS: ${OS_NAME} ARCH: ${ARCH}"
 
 mkdir -p $HOME/bin
 mkdir -p $HOME/.config/
@@ -56,14 +59,6 @@ setup_rust() {
 
 setup_nvim () {
   echo "CONFIGURING NVIM"
-  if ! command -v node >> /dev/null; then
-    # Install node
-    echo "Installing node"
-    curl -sL https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz | unxz | tar xC $HOME/bin
-    ln -fs $HOME/bin/node-v14.17.4-linux-x64/bin/* $HOME/bin/.
-    $HOME/bin/npm install -g npm
-  fi
-
   if ! command -v fzf >> /dev/null; then
     # Install fzf
     echo "Installing fzf"
@@ -151,38 +146,39 @@ setup_ssh () {
 }
 
 setup_asdf () {
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+  echo "CONFIGURING ASDF"
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "v${ASDF_VERSION}"
   . $HOME/.asdf/asdf.sh
-  if command -v python3 >> /dev/null; then
-	  PYVER=$(python3 --version | cut -d' ' -f2 | cut -d'.' -f2)
-	  if [ $((PYVER)) -lt $((9)) ]; then
-	    asdf plugin add python
-	    asdf install python 3.9.7
-	    asdf global python 3.9.7
-	  fi
-  else
-	    asdf plugin add python
-	    asdf install python 3.9.7
-	    asdf global python 3.9.7
-	  
-  fi
+  asdf plugin add python
+  asdf install python $PYTHON_VERSION
+  asdf global python $PYTHON_VERSION
+  asdf plugin add nodejs
+  asdf install nodejs $NODE_VERSION
+  asdf global nodejs $NODE_VERSION
+  echo "DONE CONFIGURING ASDF"
 }
 
-setup_linux () {
+setup_sway () {
+  echo "CONFIGURING SWAY"
   for PROG in waybar sway; do
     mkdir -p $HOME/.config/$PROG
-    if [ -L $HOME/.config/$PROG/config ]; then
-      echo "${HOME}/.config/${PROG}/config exists!"
-    else
-      echo "Removing ${HOME}/.config/${PROG}/config"
-      rm -rf $HOME/.config/$PROG/config
-      echo "Linking ${PROG}/config to ${HOME}/.config/${PROG}/config"
-      ln -s $DOTFILE_SRC/.config/${PROG}/config $HOME/.config/${PROG}/config
-    fi
+    for CF in $(find $DOTFILE_SRC/.config/$PROG -type f); do
+      CONFIGFILE=$(basename $CF)
+      if [ -L $HOME/.config/$PROG/$CONFIGFILE ]; then
+        echo "${HOME}/.config/${PROG}/${CONFIGFILE} exists!"
+      else
+        echo "Removing ${HOME}/.config/${PROG}/${CONFIGFILE}"
+        rm -rf $HOME/.config/$PROG/${CONFIGFILE}
+        echo "Linking ${PROG}/config to ${HOME}/.config/${PROG}/${CONFIGFILE}"
+        ln -s $DOTFILE_SRC/.config/${PROG}/${CONFIGFILE} $HOME/.config/${PROG}/${CONFIGFILE}
+      fi
+    done
   done
+  echo "DONE CONFIGURING SWAY"
 }
 
 setup_alacritty () {
+  echo "CONFIGURING ALACRITTY"
   if [ -L $HOME/.config/alacritty/alacritty.yml ]; then
     echo "${HOME}/.config/alacritty/alacritty.yml exists!"
   else
@@ -191,6 +187,7 @@ setup_alacritty () {
     echo "Linking ${PROG}/config/alacritty/alacritty-${OS_NAME}.yml to ${HOME}/.config/alacritty/alacritty.yml"
     ln -s $DOTFILE_SRC/.config/alacritty/alacritty-$OS_NAME.yml $HOME/.config/alacritty/alacritty.yml
   fi
+  echo "DONE CONFIGURING ALACRITTY"
 }
 
 setup_macos () {
@@ -206,7 +203,7 @@ setup_ssh
 setup_rust
 
 if [ "$OS_NAME" = "linux" ]; then
-  setup_linux
+  setup_sway
 elif [ "$OS_NAME" = "dawin" ]; then
   setup_macos
 fi

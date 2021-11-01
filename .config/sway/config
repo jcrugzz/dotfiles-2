@@ -24,6 +24,7 @@ input "type:touchpad" {
   dwt enabled
   tap_button_map lrm
   natural_scroll enabled
+  click_method clickfinger
 }
 
 ### Key bindings
@@ -172,4 +173,4 @@ bar {
 exec swayidle -w before-sleep 'swaylock -f -i /home/todd/Pictures/lock.jpg' timeout 900 'swaylock -f -i /home/todd/Pictures/lock.jpg' timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' 
 
 include /etc/sway/config.d/*
-exec nm-applet --indicator
+exec nm-applet --indicator &2>1 > /dev/nnill
