@@ -208,6 +208,8 @@ if command -v starship >> /dev/null; then
   eval "$(starship init bash)"
 fi
 
+git config --global core.excludesFile "${HOME}/.gitignore"
+
 # Generated for MacOS bash. Do not edit.
 [ -s "$HOME/.bashrc" ] && source "$HOME/.bashrc"
 

@@ -14,7 +14,7 @@
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
 [core]
-	excludesfile = /Users/toddkennedy/.gitignore
+	excludesFile = /home/todd/.gitignore
 	pager = delta --theme='Dracula'
 [pull]
 	rebase = true
