@@ -1,0 +1,4 @@
+bash
+neovim
+fzf
+xz

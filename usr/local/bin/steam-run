@@ -1,0 +1,2 @@
+#!/bin/sh
+QT_QPA_PLATFORM=xcb LD_PRELOAD=/usr/lib/libfreetype.so.6 SDL_VIDEODRIVER=x11 steam-native

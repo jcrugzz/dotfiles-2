@@ -21,7 +21,9 @@ TERM=xterm-256color
 umask 002
 HISTTIMEFORMAT="%d/%m/%y %T "
 
-. "$HOME/.cargo/env"
+if [ -d $HOME/.cargo/env ]; then
+  . "$HOME/.cargo/env"
+fi
 
 #aliases
 alias gs="git status"
@@ -87,40 +89,7 @@ function gp () {
     git push -u origin $(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p') $@
 }
 
-function server_info {
-  SERV_INFO=""
-  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
-  then SERV_INFO="$(hostname)@$(whoami)"
-  else SERV_INFO="$(hostname)"
-  fi
-  echo -ne " on $SERV_INFO"
-}
-
 GIT=$(which git)
-
-function git_prompt (){
-    if ! $GIT rev-parse --git-dir > /dev/null 2>&1; then
-        return 0
-    fi
-
-    UNCOMMITED=$($GIT diff-index --quiet HEAD --)
-    UNADDED=$($GIT ls-files --other --exclude-standard --directory --no-empty-directory)
-    BRANCH=$($GIT branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-    GIT_PROMPT=$BRANCH
-    PROMPT_COLOR="\033[0;32m"
-
-    if [ -n "$UNCOMMITTED" ]
-    then
-        PROMPT_COLOR="\033[0;36m"
-    fi
-
-    if [ -n "$UNADDED" ]
-    then
-        PROMPT_COLOR="\033[0;31m"
-    fi
-
-    echo -e ":$PROMPT_COLOR$GIT_PROMPT\033[0m"
-}
 
 if command -v brew >> /dev/null; then
   [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ] && . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
@@ -149,7 +118,6 @@ function delete-branches() {
     fzf --multi --preview="git log {}" |
     gxargs --no-run-if-empty git branch --delete --force
 }
-
 
 if command -v keychain >> /dev/null; then
   if [ -f $HOME/.no-rsa ]; then

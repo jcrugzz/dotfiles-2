@@ -1,0 +1,13 @@
+adwaita-qt
+auracle-git
+clipman
+direnv
+greetd
+greetd-tuigreet
+hal
+laptop-mode-tools
+libinput-gestures
+pacaur
+sway-launcher-desktop
+wev
+wlsunset
