@@ -6,8 +6,7 @@ set $right l
 set $term alacritty
 set $menu bemenu-run | xargs swaymsg exec --
 
-output * bg /home/todd/Pictures/yellowstone.jpg fill
-output eDP-1 pos 0 0 res 2256x1504 scale 1.33
+include /home/todd/.config/sway/current-hostname
 
 exec wl-paste -t text --watch clipman store
 bindsym $mod+shift+p clipman pick --print0 --tool=custom --tool-args="fzf --prompt 'pick >' --bind 'tab:up' --cycle --read0"
@@ -17,14 +16,6 @@ exec wlsunset -l 47.60 -L 122.330 -T 6500 -t 4000
 # input
 input  "type:keyboard" {
     xkb_options caps:escape
-}
-
-input "type:touchpad" {
-  tap enabled
-  dwt enabled
-  tap_button_map lrm
-  natural_scroll enabled
-  click_method clickfinger
 }
 
 ### Key bindings
@@ -43,17 +34,6 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# fun keys
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioMedia exec bemenu-run
 
 # Move the focused window with the same, but add Shift
 bindsym $mod+Shift+$left move left
