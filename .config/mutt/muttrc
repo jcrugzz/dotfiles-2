@@ -1,0 +1,14 @@
+source "gpg -dq $HOME/.mutt-pass.gpg |"
+
+set my_name="Todd Kennedy"
+set imap_user=toddself@fastmail.com
+set imap_pass=$my_pass
+set folder=imaps://imap.fastmail.com:993/
+set spoolfile=+Inbox
+set imap_check_subscribed
+set header_cache = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt
+set postponed = +Drafts
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 120
