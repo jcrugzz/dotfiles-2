@@ -6,9 +6,16 @@ set imap_pass=$my_pass
 set folder=imaps://imap.fastmail.com:993/
 set spoolfile=+Inbox
 set imap_check_subscribed
-set header_cache = ~/.cache/mutt
+set header_cache = ~/.cache/mutt/hdr
 set message_cachedir = ~/.cache/mutt
 set postponed = +Drafts
 unset imap_passive
 set imap_keepalive = 300
 set mail_check = 120
+set mailcap_path = $XDG_CONFIG_HOME/mutt/mailcap
+auto_view text/html
+alternative_order text/plain text/html
+set date_format="%y-%m-%d %T"
+set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"
+
+source /usr/share/doc/mutt/samples/colors.linux
