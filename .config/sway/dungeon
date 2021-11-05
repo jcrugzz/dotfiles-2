@@ -1,5 +1,5 @@
 output eDP-1 pos 0 0 res 2256x1504 scale 1.33
-output * bg /home/todd/Pictures/yellowstone.jpg fill
+output * bg /home/todd/Pictures/yosemite.jpg fill
 
 input "type:touchpad" {
   tap enabled
