@@ -47,6 +47,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioMedia exec bemenu-run
+bindsym $mod+Shift+z systemctl suspend
 
 # Move the focused window with the same, but add Shift
 bindsym $mod+Shift+$left move left

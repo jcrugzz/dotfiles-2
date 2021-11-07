@@ -7,6 +7,7 @@ greetd-tuigreet
 hal
 laptop-mode-tools
 libinput-gestures
+nerd-fonts-hack
 pacaur
 sway-launcher-desktop
 wev

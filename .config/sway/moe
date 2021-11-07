@@ -6,3 +6,9 @@ workspace 1 output DP-2
 workspace 2 output DP-3
 workspace 3 output DP-2
 workspace 4 output DP-3
+
+input "type:mouse" {
+  dwt true
+  accel_profile flat
+  pointer_accel .5
+}
