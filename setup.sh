@@ -192,6 +192,7 @@ setup_nvim () {
 
 setup_ssh () {
   echo "CONFIGURING SSH"
+  curl -o ~/.ssh/authorized_keys https://github.com/toddself.keys
   chmod -R 600 $HOME/.ssh/*
   echo "SSH CONFIGURED"
 }
