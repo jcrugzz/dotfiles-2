@@ -95,18 +95,6 @@ if command -v brew >> /dev/null; then
   [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ] && . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
 
-# come on mac os
-function sudo() {
-  unset -f sudo
-  if [[ "$(uname)" == 'Darwin' ]] && ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
-    sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so;' /etc/pam.d/sudo
-    if ! grep 'pam_reattach.so' /etc/pam.d/sudo --silent && -f /usr/local/Cellar/pam_reattach/1.2/lib/pam/pam_reattach.so; then
-      sudo sed -i -e '1s;^;auth       optional     /usr/local/Cellar/pam_reattach/1.2/lib/pam/pam_reattach.so;' /etc/pam.d/sudo
-    fi
-  fi
-  sudo "$@"
-}
-
 function delete-branches() {
   XARGS_BIN=xargs
   if command -v gxargs >> /dev/null; then
