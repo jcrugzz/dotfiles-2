@@ -5,7 +5,7 @@
 [user]
 	name = Todd Kennedy
 	email = todd@selfassembled.org
-	signingKey = 63171C7DE7BB9A30ADD22B1665F7E40DBD3691D8
+	signingKey = 866B947231B867B76AC9927C6FF78D72823053B5
 [difftool]
 	prompt = false
 [mergetool]
