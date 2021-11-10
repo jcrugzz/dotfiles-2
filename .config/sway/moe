@@ -1,4 +1,4 @@
-output * bg /home/todd/Pictures/yellowstone.jpg fill
+output * bg /home/todd/Pictures/ardennes.jpg fill
 # output DP-2 pos 0 0 res 2560x1440
 # output DP-3 pos 2560 0 res 2560x1440
 output DP-3 pos 0 0 res 3840x1600

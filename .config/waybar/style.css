@@ -2,25 +2,20 @@
   border: none;
   border-radius: 0;
   font-family: "Ubuntu Nerd Font";
-  font-size: 13px;
+  font-size: 14px;
   min-height: 0;
 }
 
 window#waybar {
-  background: transparent;
+  background: rgba(66,66,66,0.4);
   color: white;
 }
 
 #window {
   font-family: "Ubuntu";
   margin-top: 5px;
+  font-weight: bold;
 }
-
-/*
-#workspaces {
-    padding: 0 5px;
-}
-*/
 
 #workspaces button {
   padding: 0 5px;
