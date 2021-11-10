@@ -30,8 +30,6 @@ window#waybar {
 }
 
 #tray,
-#custom-japan,
-#custom-germany,
 #temperature,
 #clock,
 #battery,
@@ -42,6 +40,12 @@ window#waybar {
   padding: 0 5px;
   margin-right: 5px;
   margin-top: 5px;
+}
+
+#custom-media {
+  padding: 0 5px;
+  margin-right: 5px;
+  margin-top: 6px;
 }
 
 #temperature.critical {
