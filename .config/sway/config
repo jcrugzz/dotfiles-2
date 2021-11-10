@@ -1,7 +1,6 @@
 set $mod Mod4
 set $left h
-set $down j
-set $up k
+set $down j set $up k
 set $right l
 set $term alacritty
 set $menu bemenu-run | xargs swaymsg exec --
@@ -124,7 +123,8 @@ bar {
 for_window [class="Plexamp"] floating enable
 
 # exec
-exec swayidle -w before-sleep 'swaylock -f -i /home/todd/Pictures/lock.jpg' timeout 900 'swaylock -f -i /home/todd/Pictures/lock.jpg' timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' 
+exec swayidle -w -c $HOME/.config/swayidle/config 
+
 exec nm-applet --indicator
 exec wl-paste -t text --watch clipman store
 exec wlsunset -l 47.6 -L -122.3 -T 6500 -t 4000

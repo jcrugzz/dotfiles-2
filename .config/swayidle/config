@@ -1,0 +1,6 @@
+before-sleep 'swaylock -c /home/todd/.config/swaylock/config'
+timeout 900 'swaylock -c /home/todd/.config/swaylock/config'
+timeout 1200 'swaymsg "output * dpms off"'
+timeout 1200 'playerctl stop'
+resume 'swaymsg "output * dpms on"'
+idlehint 1200

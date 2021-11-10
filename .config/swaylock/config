@@ -1,0 +1,4 @@
+indicator-idle-visible
+daemonize
+ignore-empty-password
+image=/home/todd/Pictures/lock.jpg
