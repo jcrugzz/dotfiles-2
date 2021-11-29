@@ -10,19 +10,24 @@ CYAN="\[\033[0;36m\]"
 RED="\[\033[0;31m\]"
 OFF="\[\033[0m\]"
 VIRTUAL_ENV_DISABLE_PROMPT=true
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export HOMEBREW_NO_ENV_HINTS=1
+
 if command -v nvim >> /dev/null; then
   EDITOR=nvim
 else
   EDITOR=vim
 fi
-# PS1="$YELLOW\w$OFF\$(git_prompt)\$(server_info)\n[$CYAN\D{%H:%M:%S}$OFF] \$ "
+
 TERMINAL=gnome-terminal
 TERM=xterm-256color
 umask 002
 HISTTIMEFORMAT="%d/%m/%y %T "
 
-if [ -d $HOME/.cargo/env ]; then
+if [ -f $HOME/.cargo/env ]; then
   . "$HOME/.cargo/env"
+else 
+  echo "NO FUCKING CARGO"
 fi
 
 #aliases
@@ -148,6 +153,11 @@ else
   $GIT config --global --unset user.signingKey
 fi
 
+if [ -f $HOME/.git-email ]; then
+  GIT_EMAIL=$(cat $HOME/.git-email)
+  $GIT config --global user.email $GIT_EMAIL
+fi
+
 [ -f $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
 [ -f $HOME/.asdf/asdf/completions/asdf.bash ] && . $HOME/.asdf/completions/asdf.bash
 if command -v direnv >> /dev/null; then
@@ -170,3 +180,5 @@ git config --global core.excludesFile "${HOME}/.gitignore"
 [ -s "$HOME/.bashrc" ] && source "$HOME/.bashrc"
 
 if [ -e /Users/toddkennedy/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/toddkennedy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+alias okta='OKTA_DOMAIN="godaddy.okta.com"; KEY=$(openssl rand -hex 18); eval $(aws-okta-processor authenticate -e -o $OKTA_DOMAIN -u $USER -k $KEY -d 7200)'
