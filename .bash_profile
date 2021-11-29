@@ -137,6 +137,12 @@ if command -v keychain >> /dev/null; then
     eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
   fi
 
+  # see if there are other ssh keys to load
+  KEYS=$(fd -t f id_* $HOME/.ssh -E *pub)
+  for KEY in $KEYS; do
+    echo "Adding ${KEY}"
+    eval `keychain --agents ssh --eval $KEY`
+  done
 
   if [ -f $HOME/.no-gpg ]; then
     echo "No GPG agent loaded"
