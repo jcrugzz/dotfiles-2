@@ -191,12 +191,12 @@ setup_dotfiles () {
 setup_nvim () {
   echo "CONFIGURING NVIM"
   python3 -m pip install --user --upgrade pynvim
-  mkdir -p ~/.config/coc/extensions
-  cd ~/.config/coc/extensions
+  mkdir -p $HOME/.config/coc/extensions
+  cd $HOME/.config/coc/extensions
   if [ ! -f package.json ]; then
     echo '{"dependencies":{}}' > package.json
-    if which npm >> /dev/null; then
-      $HOME/bin/npm install coc-deno coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-loack --only=prod
+    if command -v npm >> /dev/null; then
+      npm install coc-deno coc-snippets coc-yaml coc-go coc-tsserver coc-solargraph coc-rust-analyzer coc-json --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
     fi
   fi
 
