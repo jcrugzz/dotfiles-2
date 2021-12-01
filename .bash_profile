@@ -19,8 +19,7 @@ else
   EDITOR=vim
 fi
 
-TERMINAL=gnome-terminal
-TERM=xterm-256color
+TERM=alacritty-direct
 umask 002
 HISTTIMEFORMAT="%d/%m/%y %T "
 
