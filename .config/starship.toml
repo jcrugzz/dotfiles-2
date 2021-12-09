@@ -1,27 +1,39 @@
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vicmd_symbol = "[❯](bold green)"
+success_symbol = "[❯](bold #50fa7b)"
+error_symbol = "[❯](bold #ff555)"
+vicmd_symbol = "[❯](bold $50fa7b)"
 
 [time]
 disabled=false
-style = "fg:cyan"
+style = "fg:#8be9fd"
 time_format="%T"
 format = "[$time]($style)"
 
 [directory]
 truncation_length = 8
+format = "[$path ](bold #6272a4)"
 
 [battery]
 full_symbol = ""
 charging_symbol = ""
 discharging_symbol = ""
 
+[[battery.display]]
+threshold = 10
+style = "bold #ff555"
+
+[[battery.display]]
+threshold = 30
+style = "bold #f1fa8c"
+
 [docker_context]
 symbol = " "
 
 [git_branch]
 symbol = " "
+
+[git_status]
+style = "bold #ff79c6"
 
 [golang]
 symbol = " "

@@ -50,6 +50,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Themes
 Plug 'sickill/vim-monokai'
 Plug 'doums/darcula'
+Plug 'dracula/vim',{'as': 'dracula'}
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -68,7 +69,7 @@ call plug#end()
 " Required:
 filetype plugin indent on
 syntax on
-silent! colorscheme darcula
+silent! colorscheme dracula
 let g:rustfmt_autosave = 1
 
 " Basic Setup
@@ -171,6 +172,7 @@ endif
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/src/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+au BufNewFile ~/src/vimwiki/*.md :silent 0r !/Users/tkennedy1/.cargo/bin/vm-template '%'
 
 " nerdtree
 map <leader>n :NERDTreeToggle<CR>

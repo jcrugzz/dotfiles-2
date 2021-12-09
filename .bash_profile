@@ -187,3 +187,5 @@ git config --global core.excludesFile "${HOME}/.gitignore"
 if [ -e /Users/toddkennedy/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/toddkennedy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 alias okta='OKTA_DOMAIN="godaddy.okta.com"; KEY=$(openssl rand -hex 18); eval $(aws-okta-processor authenticate -e -o $OKTA_DOMAIN -u $USER -k $KEY -d 7200)'
+alias dlgd='aws ecr get-login --no-include-email --region us-west-2 --registry-ids 764525110978'
+alias splitio='aws --region us-west-2 secretsmanager get-secret-value --secret-id splitio_api_key --output text --query SecretString'
