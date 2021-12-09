@@ -88,7 +88,7 @@ deleted_style = "bold #ff555"
 [git_status]
 style = "bold #ff555"
 
-[go]
+[golang]
 style = "bold #8be9fd"
 
 [helm]
