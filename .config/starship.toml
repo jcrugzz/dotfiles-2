@@ -11,7 +11,7 @@ format = "[$time]($style)"
 
 [directory]
 truncation_length = 8
-format = "[$path ](bold #6272a4)"
+style = "bold #6272a4"
 
 [battery]
 full_symbol = ""
@@ -26,11 +26,182 @@ style = "bold #ff555"
 threshold = 30
 style = "bold #f1fa8c"
 
+[aws]
+style = "bold #6272a4"
+
+[cmake]
+style = "bold #6272a4"
+
+[cobol]
+style = "bold #6272a4"
+
+[cmd_duration]
+style = "bold #f1fa8c"
+
+[conda]
+style = "bold #50fa7b"
+
+[crystal]
+style = "bold #ff555"
+
+[dart]
+style = "bold #6272a4"
+
+[deno]
+style = "bold #50fa7b"
+
+[docker_context]
+style = "bold #6272a4"
+
+[dotnet]
+style = "bold #6272a4"
+
+[elixir]
+style = "bold #bd93f9"
+
+[elm]
+style = "bold #8be9fd"
+
+[env_var]
+style = "bold #44475a"
+
+[erlang]
+style = "bold #ff5555"
+
+[gcloud]
+style = "bold #6272a4"
+
 [git_branch]
+style = "bold #bd93f9"
 symbol = " "
 
+[git_commit]
+style = "bold #50fa7b"
+
+[git_state]
+style= "bold #f1fa8c"
+
+[git_metrics]
+added_style = "bold #50fa7b"
+deleted_style = "bold #ff555"
+
 [git_status]
-style = "bold #ff79c6"
+style = "bold #ff555"
+
+[go]
+style = "bold #8be9fd"
+
+[helm]
+style = "bold #f8f8f2"
+
+[hostname]
+style = "bold dimmed #50fa7b"
+
+[java]
+style = "dimmed #ff555"
+
+[jobs]
+style = "bold #6272a4"
+
+[julia]
+style = "bold #db93f9"
+
+[kotlin]
+style = "bold #6272a4"
+
+[kubernetes]
+style = "bold #8be9fd"
+
+[lua]
+style = "bold #6272a4"
+
+[memory_usage]
+style = "bold dimmed #f8f8f2"
+
+[hg_branch]
+style = "bold #bd93f9"
+
+[nim]
+style = "bold #f1fa8c"
+
+[nix_shell]
+style = "bold #6272a4"
+
+[nodejs]
+style = "bold #50fa7b"
+
+[ocaml]
+style = "bold #f1fa8c"
+
+[openstack]
+style = "bold #f1fa8c"
+
+[package]
+style = "bold #ffb86c"
+
+[perl]
+style = "bold #50fa7b"
+
+[php]
+style = "bold #bd94f9"
+
+[pulumi]
+style = "bold dimmed #db93f9"
+
+[purescript]
+style = "bold #f8f8f2"
+
+[python]
+style = "bold #f1fa8c"
+
+[rlang]
+style = "bold #6272a4"
+
+[red]
+style = "bold #ff5555"
+
+[ruby]
+style = "bold #ff5555"
+
+[rust]
+style = "bold #ff5555"
+
+[scala]
+style = "bold dimmed #ff5555"
+
+[shell]
+style = "bold #f8f8f2"
+
+[shlvl]
+style = "bold #f1fa8c"
+
+[singularity]
+style = "bold dimmed #6272a4"
+
+[status]
+style = "bold #ff5555"
+
+[swift]
+style = "bold #ffb86c"
+
+[terraform]
+style = "bold #8be9fd"
+
+[username]
+style_root = "bold #ff5555"
+style_user = "bold #f1fa8c"
+
+[vagrant]
+style = "bold #8be9fd"
+
+[vlang]
+style = "bold #6272a4"
+
+[vcsh]
+style = "bold #f1fa8c"
+
+[zig]
+style = "bold #f1fa8c"
 
 # [docker_context]
 # symbol = " "
