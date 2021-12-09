@@ -30,7 +30,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/CSApprox'
 Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'mbbill/undotree'
@@ -247,5 +246,3 @@ xmap <S-TAB> <Plug>(neosnippet_expand_target)
 " clipper
 nnoremap <leader>y :call system('nc -U ~/.clipper.sock', @0)<CR>
 
-" ruby formatter
-let g:rufo_auto_formatting = 1
