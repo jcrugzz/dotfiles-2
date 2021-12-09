@@ -26,32 +26,33 @@ style = "bold #ff555"
 threshold = 30
 style = "bold #f1fa8c"
 
-[docker_context]
-symbol = " "
-
 [git_branch]
 symbol = " "
 
 [git_status]
 style = "bold #ff79c6"
 
-[golang]
-symbol = " "
+# [docker_context]
+# symbol = " "
 
-[memory_usage]
-symbol = " "
 
-[nodejs]
-symbol = " "
+# [golang]
+# symbol = " "
 
-[package]
-symbol = " "
+# [memory_usage]
+# symbol = " "
 
-[python]
-symbol = " "
+# [nodejs]
+# symbol = " "
 
-[ruby]
-symbol = " "
+# [package]
+# symbol = " "
 
-[rust]
-symbol = " "
+# [python]
+# symbol = " "
+
+# [ruby]
+# symbol = " "
+
+# [rust]
+# symbol = " "
