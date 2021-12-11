@@ -4,8 +4,8 @@
 	who = blame
 [user]
 	name = Todd Kennedy
-	email = 95242064+tkennedy1-godaddy@users.noreply.github.com
-	signingKey = 866B947231B867B76AC9927C6FF78D72823053B5
+	email = todd@selfassembled.org
+	signingKey = 63171C7DE7BB9A30ADD22B1665F7E40DBD3691D8
 [difftool]
 	prompt = false
 [mergetool]

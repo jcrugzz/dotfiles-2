@@ -8,3 +8,9 @@ input "type:touchpad" {
   natural_scroll enabled
   click_method clickfinger
 }
+
+workspace 1 
+exec alacritty 
+
+workspace 2
+exec firefox
