@@ -20,7 +20,6 @@ else
 fi
 
 umask 002
-HISTTIMEFORMAT="%d/%m/%y %T "
 
 if [ -f $HOME/.cargo/env ]; then
   . "$HOME/.cargo/env"

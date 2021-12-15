@@ -5,4 +5,15 @@ alias okta='OKTA_DOMAIN="godaddy.okta.com"; KEY=$(openssl rand -hex 18); eval $(
 alias dlgd='aws ecr get-login --no-include-email --region us-west-2 --registry-ids 764525110978'
 alias splitio='aws --region us-west-2 secretsmanager get-secret-value --secret-id splitio_api_key --output text --query SecretString'
 
+alias okta_fd_dp='eval `oktaplz --user tkennedy1 --role arn:aws:iam::372581112254:role/GD-AWS-USA-CTO-FrontDoorPro-Dev-Private-PowerUser`'
+alias okta_fd_dev='eval `oktaplz --user tkennedy1 --role arn:aws:iam::663162811906:role/GD-AWS-USA-CTO-FrontDoorPro-Ops`'
+alias okta_fd_test='eval `oktaplz --user tkennedy1 --role arn:aws:iam::226994726560:role/GD-AWS-USA-CTO-FrontDoorPro-Ops`'                             
+alias okta_fd_ote='eval `oktaplz --user tkennedy1 --role arn:aws:iam::623716691036:role/GD-AWS-USA-CTO-FrontDoorPro-Ops`'
+alias okta_fd_prod='eval `oktaplz --user tkennedy1 --role arn:aws:iam::195266620747:role/GD-AWS-USA-CTO-FrontDoorPro-Ops`'
+alias okta_fd_cicd='eval `oktaplz --user tkennedy1 --role arn:aws:iam::680498430958:role/GD-AWS-USA-CTO-FrontDoorPro-Ops`'
+alias okta_fdp_dev='eval `oktaplz -a gdp --user tkennedy1 --role arn:aws:iam::569768211507:role/GD-AWS-P-USA-CTO-FDoorPCI-Ops`'
+alias okta_fdp_test='eval `oktaplz -a gdp --user tkennedy1 --role arn:aws:iam::978409412356:role/GD-AWS-P-USA-CTO-FDoorPCI-Ops`'
+alias okta_fdp_ote='eval `oktaplz -a gdp --user tkennedy1 --role arn:aws:iam::358160969783:role/GD-AWS-P-USA-CTO-FDoorPCI-Ops`'
+alias okta_fdp_prod='eval `oktaplz -a gdp --user tkennedy1 --role arn:aws:iam::394283155748:role/GD-AWS-P-USA-CTO-FDoorPCI-Ops`'  
+
 TERM=alacritty-direct

@@ -1,3 +1,12 @@
 font:
   size: 15.0
 
+window:
+  dimensions:
+    columns: 167
+    lines: 93
+  position:
+    x: 3008
+    y: 0
+  decorations: none
+

@@ -69,6 +69,9 @@ call plug#end()
 filetype plugin indent on
 syntax on
 silent! colorscheme dracula
+
+" rust
+autocmd FileType rust set makeprg=cargo\ build\ --target=wasm32-wasi\ --release
 let g:rustfmt_autosave = 1
 
 " Basic Setup
@@ -171,7 +174,8 @@ endif
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/src/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-au BufNewFile ~/src/vimwiki/*.md :silent 0r !/Users/tkennedy1/.cargo/bin/vm-template '%'
+au BufNewFile ~/src/vimwiki/*.md :silent 0r !vm-template
+map ,ll :silent r !vm-template --link '%'<CR>
 
 " nerdtree
 map <leader>n :NERDTreeToggle<CR>
