@@ -5,6 +5,7 @@ set $up k
 set $right l
 set $term alacritty
 set $menu bemenu-run | xargs swaymsg exec --
+set $scripts ~/.config/sway
 
 # different machines have different monitor configs
 include /home/todd/.config/sway/current-hostname
@@ -22,12 +23,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 floating_modifier $mod normal
 bindsym $mod+Shift+c reload
-bindsym Mod4+shift+e exec swaynag \
-  -t warning \
-  -m 'What do you want to do?' \
-  -b 'Poweroff' 'systemctl poweroff' \
-  -b 'Reboot' 'systemctl reboot' \
-  -b 'Logout' 'swaymsg ext' 
+bindsym Mod4+Shift+e exec $term --class=fzf-launcher -e "/home/todd/.config/sway/exit.sh"
+
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
@@ -127,11 +124,14 @@ bar {
 # app control
 ## always make plex a floating window
 for_window [class="Plexamp"] floating enable
+for_window [app_id="fzf-launcher"] focus, floating enable, border pixel 1
 
 # exec
 exec systemd-cat -t swayidle -- swayidle -d -w -C $HOME/.config/swayidle/config 
 exec systemd-cat -t nm-applet -- nm-applet --indicator
 exec systemd-cat -t wl-paste -- wl-paste -t text --watch clipman store
 exec systemd-cat -t wlsunset -- wlsunset -l 47.6 -L -122.3 -T 6500 -t 4000
+exec systemd-cat -t wl-paste-watch -- wlpaste -t text --watch clipman store --notify 2>&1
+exec systemd-cat -t wl-paste-store -- wlpaste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 
 include /etc/sway/config.d/*
