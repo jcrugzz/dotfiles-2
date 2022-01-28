@@ -4,5 +4,6 @@
   "javascript.showUnused": false,
   "go.goplsOptions": {
     "semanticTokens": true
-  }
+  },
+  "javascript.suggestionActions.enabled": false
 }

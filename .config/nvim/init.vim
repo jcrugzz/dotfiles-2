@@ -3,7 +3,7 @@
 "*****************************************************************************
 let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "go,html,javascript,ruby,rust,typescript"
+let g:vim_bootstrap_langs = "go,html,javascript,rust,typescript"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -34,14 +34,13 @@ Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
-Plug 'tweekmonster/gofmt.vim'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'rust-lang/rust.vim'
 Plug 'burner/vim-svelte'
 Plug 'wincent/vim-clipper'
-Plug 'ruby-formatter/rufo-vim'
+Plug 'dense-analysis/ale'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -73,6 +72,12 @@ silent! colorscheme dracula
 " rust
 autocmd FileType rust set makeprg=cargo\ build\ --target=wasm32-wasi\ --release
 let g:rustfmt_autosave = 1
+
+" js ale
+let g:ale_disable_lsp = 1
+let g:ale_linters = {'javascript': ['eslint'], 'go': []}
+let g:ale_fixers = {'javascript': ['eslint'], 'go': ['goimports']}
+let g:ale_fix_on_save = 1
 
 " Basic Setup
 "" Encoding
@@ -238,9 +243,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <F2> <Plug>(coc-rename)
 
 " gofmt
-let gofmt_exec=system('echo -n $(which goimports)')
-let g:gofmt_exe=gofmt_exec
-let g:gofmt_on_save=1
+au BufWritePost *.go :silent !goimports -w %
 
 " snippets
 imap <S-TAB> <Plug>(neosnippet_expand_or_jump)
