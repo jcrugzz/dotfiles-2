@@ -24,8 +24,8 @@ fi
 NODE_VERSION="16.13.0"
 PYTHON_VERSION="3.10.0"
 ASDF_VERSION="0.8.1"
-FZF_VERSION=0.27.3
-NEOVIM_VERSION=0.5.0
+FZF_VERSION="0.27.3"
+NEOVIM_VERSION="0.6.0"
 
 echo "Script source: ${DOTFILE_SRC}, OS: ${OS_NAME}, ARCH: ${ARCH}, DISTRO: ${DISTRO}"
 
@@ -54,7 +54,7 @@ install_os_packages () {
       popd
       echo "-> Installing packages from AUR"
       pacaur -S --noedit --noconfirm --needed $(cat aur-pkglist.txt)
-    elif [ "$DISTRO" = "ubuntu" ] || [ "${DISTRO}" = "debian" ]; then
+    elif [ "${DISTRO}" = "ubuntu" ] || [ "${DISTRO}" = "debian" ]; then
       # needed for appimages to work
       sudo apt install -y base-devel git libfuse2 libssl-dev xz-utils
     fi
