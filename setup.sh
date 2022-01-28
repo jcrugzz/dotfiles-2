@@ -213,6 +213,15 @@ setup_ssh () {
   echo "SSH CONFIGURED"
 }
 
+setup_fzf () {
+  if [ -d $HOME/src/fzf ]; then
+    echo "FZF Installed"
+  else 
+    mkdir -p $HOME/src
+    git clone https://github.com/junegunn/fzf.git $HOME/src/fzf
+  fi
+}
+
 # we need python installed first...
 if [ ! -f $HOME/.no-os-packages ]; then
   install_os_packages
@@ -226,3 +235,4 @@ setup_dotdirs
 setup_nvim
 setup_ssh
 setup_rust
+setup_fzf
