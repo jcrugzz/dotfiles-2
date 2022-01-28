@@ -10,3 +10,8 @@ window:
     y: 0
   decorations: none
 
+shell:
+  program: /usr/local/bin/bash
+  args:
+    - --login
+

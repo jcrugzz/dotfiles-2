@@ -21,11 +21,6 @@ font:
 selection:
   save_to_clipboard: true
 
-shell:
-  program: /bin/bash
-  args:
-    - --login
-
 working_directory: None
 
 mouse:
