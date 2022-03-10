@@ -1,17 +1,5 @@
 # set up keychain
 if command -v keychain >> /dev/null; then
-  if [ -f $HOME/.no-rsa ]; then
-    echo "Ignoring RSA key"
-  else
-    if [ -L $HOME/.ssh/id_rsa ]; then
-      echo "RSA key already aliased"
-    else
-      ln -s ${HOME}/.ssh/${HOSTNAME} ${HOME}/.ssh/id_rsa
-      ln -s ${HOME}/.ssh/${HOSTNAME}.pub ${HOME}/.ssh/id_rsa.pub
-    fi
-    eval `keychain --agents ssh --eval ~/.ssh/id_rsa`
-  fi
-
   if [ -f $HOME/.no-ed ]; then
     echo "Ignoring ED25519 key"
   else
@@ -37,6 +25,7 @@ if command -v keychain >> /dev/null; then
     $GIT config --global --unset user.signingKey
   elif [ -f $HOME/.gpg-key ]; then
     GPG_KEY=$(cat $HOME/.gpg-key)
+    echo "Using GPG_KEY ${GPG_KEY}"
     eval `keychain --agents gpg --eval $GPG_KEY` 
     $GIT config --global commit.gpgsign true
     $GIT config --global user.signingKey $GPG_KEY

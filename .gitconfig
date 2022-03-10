@@ -5,7 +5,7 @@
 [user]
 	name = Todd Kennedy
 	email = 95242064+tkennedy1-godaddy@users.noreply.github.com
-	signingKey = 3D668A3EC0904096648823F0275895C5CC4A43BE
+	signingKey = 76C94B39495372F020E52CE00DB93483AF63A1BD
 [difftool]
 	prompt = false
 [mergetool]
@@ -14,7 +14,7 @@
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
 [core]
-	excludesFile = /Users/tkennedy1/.gitignore
+	excludesFile = /home/todd/.gitignore
 	pager = delta --theme='Dracula'
 [pull]
 	rebase = true

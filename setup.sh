@@ -6,6 +6,7 @@ fi
 
 OS_NAME=$(uname -s | tr A-Z a-z)
 ARCH=$(uname -m)
+GLIB=$(ldd --version ldd | head -n 1 | cut -d' ' -f5)
 if command -v lsb_release >> /dev/null; then
   DISTRO=$(lsb_release -is | tr A-Z a-z)
 else
@@ -15,7 +16,9 @@ else
   fi
 fi
 
-if command -v hostnamectl >> /dev/null; then
+if [ -f /etc/hostname ]; then
+  HOSTNAME=$(cat /etc/hostname)
+elif command -v hostnamectl >> /dev/null; then
   HOSTNAME=$(hostnamectl hostname)
 else
   HOSTNAME=$(hostname)
@@ -25,7 +28,7 @@ NODE_VERSION="16.13.0"
 PYTHON_VERSION="3.10.0"
 ASDF_VERSION="0.8.1"
 FZF_VERSION="0.27.3"
-NEOVIM_VERSION="0.6.0"
+NEOVIM_VERSION="0.6.1"
 
 echo "Script source: ${DOTFILE_SRC}, OS: ${OS_NAME}, ARCH: ${ARCH}, DISTRO: ${DISTRO}"
 
@@ -56,13 +59,9 @@ install_os_packages () {
       pacaur -S --noedit --noconfirm --needed $(cat aur-pkglist.txt)
     elif [ "${DISTRO}" = "ubuntu" ] || [ "${DISTRO}" = "debian" ]; then
       # needed for appimages to work
-      sudo apt install -y base-devel git libfuse2 libssl-dev xz-utils
+      sudo apt install -y build-essential curl git libfuse2 libssl-dev xz-utils\
+        zlib1g-dev libffi-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev
     fi
-    echo "-> Installing neovim appimage"
-    # Install neovim
-    mkdir -p $HOME/bin
-    curl -L -o $HOME/bin/nvim https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim.appimage
-    chmod a+x $HOME/bin/nvim
   else
     "-> Installing xcode command line tools"
     xcode-select --install
@@ -105,7 +104,7 @@ setup_rust() {
     source $HOME/.cargo/env
   fi
 
-  if [ -f $DOTFILE_SRC/$OS_NAME-$ARCH-bin.tar.xz ]; then
+  if [ -f $DOTFILE_SRC/$OS_NAME-$ARCH-glib-$GLIB-bin.tar.xz ]; then
     echo "Copying pre-built binaries for ${OS_NAME} ${ARCH}"
     pushd $HOME/bin
     tar xJf $DOTFILE_SRC/$OS_NAME-$ARCH-bin.tar.xz
@@ -113,7 +112,9 @@ setup_rust() {
   else
     echo "No pre-built binaries, building from scratch (this might take a while...)"
     for PKG in $CARGO_PACKAGES; do
-      cargo install $PKG
+      if [ ! -f $HOME/.cargo/bin/$PKG ]; then
+        cargo install $PKG
+      fi
     done
   fi
   echo "CONFIGURED RUST"
@@ -189,6 +190,13 @@ setup_dotfiles () {
 }
 
 setup_nvim () {
+  if [ ! -f $HOME/bin/nvim ]; then
+    echo "-> Installing neovim appimage"
+    # Install neovim
+    mkdir -p $HOME/bin
+    curl -L -o $HOME/bin/nvim https://github.com/neovim/neovim/releases/download/v$NEOVIM_VERSION/nvim.appimage
+    chmod a+x $HOME/bin/nvim
+  fi
   echo "CONFIGURING NVIM"
   python3 -m pip install --user --upgrade pynvim
   mkdir -p $HOME/.config/coc/extensions
@@ -200,7 +208,7 @@ setup_nvim () {
     fi
   fi
 
-  nvim --headless +'PlugInstall --sync' +qa
+  $HOME/bin/nvim --headless +'PlugInstall --sync' +qa
   echo "NVIM CONFIGURED"
 }
 
